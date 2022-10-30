@@ -1,0 +1,16 @@
+<header>
+    <nav>
+            <a [routerLink]="['']"  class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a [routerLink]="['/store']" routerLinkActive="active-link" routerLinkActive="active-link">Store</a></li>
+                <!--auth  -->
+                <li><a [routerLink]="['/register']" routerLinkActive="active-link" *ngIf="!isLoggedIn">Register</a></li>
+                <li><a [routerLink]="['/login']" routerLinkActive="active-link" *ngIf="!isLoggedIn">Login</a></li>
+                <!--user mangment  -->
+                <li><a [routerLink]="['/user']" routerLinkActive="active-link" *ngIf="isLoggedIn && role === 'user'">User Page</a></li>
+                <li><a [routerLink]="['/admin']" routerLinkActive="active-link" *ngIf="isLoggedIn && role === 'admin'">Admin Page</a></li>
+                <!--end session  -->
+                <li><a  routerLinkActive="active-link" *ngIf="isLoggedIn" (click)="logout()">Logout</a></li>
+            </ul>
+    </nav>
+</header>

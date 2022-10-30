@@ -1,0 +1,67 @@
+<div class="" *ngIf="true;">
+  <app-finalize-sale></app-finalize-sale>
+</div>
+
+<div class="checkout-wrapper">
+  <div class="checkout-cart">
+    <div class="checkout-cart_items">
+      <table>
+        <thead>
+          <td>name</td>
+          <td>quantity</td>
+          <td>price</td>
+        </thead>
+        <tbody>
+          <!-- looping items -->
+          <tr></tr>
+        </tbody>
+      </table>
+      <div class="metrics">
+        <div class="">Total Items:</div>
+        <div class="">Total Price:</div>
+      </div>
+    </div>
+  </div>
+  <div class="checkout-delivery">
+    <div class="actions">
+      <button (click)="invokeSavedAddress()">Use Saved Address</button>
+      <!-- <button (click)="resetDelivery()">Reset Ipunts</button> -->
+      <!-- <button (click)="saveDelivery()">Save Delivery Info</button> -->
+      <!-- <button (click)="(saveAndExit)"> -->
+        <!-- Save delivery details and go back to store -->
+      <!-- </button> -->
+    </div>
+    <h2>Delivery Information</h2>
+    <form action="">
+      <div class="">
+        <label for="">
+        <input type="text" name="" id="" /></label>
+      </div>
+      <div class="">
+        <label for="">
+        <input type="text" name="" id="" /></label>
+      </div>
+      <div class="">
+        <label for="">
+        <input type="text" name="" id="" /></label>
+      </div>
+      <div class="">
+        <label for="">
+        <input type="text" name="" id="" /></label>
+      </div>
+      <div class="">
+        <label for="">
+        <input type="text" name="" id="" /></label>
+      </div>
+      <div class=""></div>
+    </form>
+  </div>
+  <div class="action-bar">
+    <div class="delete">
+      <!-- <button (click)="deleteCartAndDelivery()">Delete Cart</button> -->
+    </div>
+    <div class="submit-cart">
+      <!-- <button (click)="submitInfo()">Submit</button> -->
+    </div>
+  </div>
+</div>

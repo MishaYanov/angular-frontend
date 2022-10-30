@@ -1,0 +1,55 @@
+<div class="add--wrapper">
+  <form action="" [formGroup]="newProductForm">
+    <div class="add--input_item">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" formControlName="name"/>
+    </div>
+    <div class="add--input_item">
+      <label for="price">Price</label>
+      <input type="number" name="price" id="price" formControlName="price"/>
+    </div>
+    <div class="add--input_item">
+      <label for="description">Description</label>
+      <textarea name="description" id="" cols="30" rows="10" formControlName="description"></textarea>
+    </div>
+    <div class="add--input_item">
+      <label for="image">Image</label>
+      <input type="file" name="image" id="image" formControlName="image"/>
+    </div>
+    <div class="add--input_item">
+      <label for="carCategory">Car</label>
+      <select name="carSelector" id="carSelector" formControlName="carCategoryId">
+        <option value="undefined">Car Categories</option>
+        <option *ngFor="let car of carCategories" [ngValue]="car.id">{{car.name}}</option>
+    </select>
+    </div>
+    <div class="add--input_item">
+      <label for="partCategory">Part</label>
+      <select name="partSelector" id="partSelector" formControlName="partCategoryId">
+        <option value="undefined">Part Categories</option>
+        <option *ngFor="let part of partCategories" [ngValue]="part.id">{{part.name}}</option>
+    </select>
+    </div>
+    <div class="errors">
+        <div *ngIf="form['name']?.invalid && form['name']?.touched">
+            <p>Name is required</p>
+        </div>
+        <div *ngIf="form['price']?.invalid && form['price']?.touched">
+            <p>Price is required</p>
+        </div>
+        <div *ngIf="form['carCategoryId']?.invalid && form['carCategoryId']?.touched">
+            <p>Car Category is required</p>
+        </div>
+        <div *ngIf="form['partCategoryId']?.invalid && form['partCategoryId']?.touched">
+            <p>Part Category is required</p>
+        </div>
+        <div *ngIf="form['image']?.errors?.['invalidImageType']">
+            <p>Image type is invalid</p>
+        </div>
+    </div>
+    <div class="actions">
+      <button type="button" (click)="addProduct()">Add</button>
+      <button type="button" (click)="reset()">reset</button>
+    </div>
+  </form>
+</div>

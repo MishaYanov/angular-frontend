@@ -1,0 +1,26 @@
+
+    <td class="item-image">
+        <img src="{{product.image}}" alt="{{product.name}}">
+    </td>
+    <td class="item-name">
+        <h4>{{product.name}}</h4>
+    </td>
+    <td class="item-price">
+        <h4>{{product.price}}</h4>
+    </td>
+    <td class="item-description">
+        <p>{{product.description}}</p>
+    </td>
+    <td>
+        <p>{{product.partCategory.name}}</p>
+    </td>
+    <td>
+        <p>{{product.carCategory.name}}</p>
+    </td>
+    <td class="item-action">
+        <a class="item-add_item_to_cart"  *ngIf="!isAdmin" (click)="addItemTocart()"><mat-icon>add_shopping_cart</mat-icon></a>
+        <a class="item-add_item_to_cart"  *ngIf="!isAdmin" (click)="deleteItemFromCart()"><mat-icon>delete</mat-icon></a>
+        <a class="item-add_item_to_cart"  *ngIf="isAdmin" (click)="deleteHandler()"><mat-icon>delete_forever</mat-icon></a>
+        <a class="item-add_item_to_cart"  *ngIf="isAdmin" (click)="editHandeler()"><mat-icon>edit</mat-icon></a>
+    </td>
+

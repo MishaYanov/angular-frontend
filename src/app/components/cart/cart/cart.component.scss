@@ -1,0 +1,36 @@
+@import '../../../../styles/styles.scss';
+
+.cart-wrapper{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    margin-left: 4px;
+    .cart-table{
+        table{
+        width: 100%;
+        height: fit-content;
+        gap: 1rem;
+        thead{
+            background-color: #ccc;
+                td{
+                    padding: 1rem;
+                    color: $primary-color;
+                }
+        }
+        tbody{
+            height: 50vh;
+            tr{
+                td{
+                    padding: 0.5rem;
+                    border-bottom: 1px solid #ccc;
+                }
+            }
+        }
+    }
+    }
+    
+}
+.cart-controllers{
+    margin-bottom: 7rem;
+}

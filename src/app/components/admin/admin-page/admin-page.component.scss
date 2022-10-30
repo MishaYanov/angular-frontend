@@ -1,0 +1,30 @@
+.admin--wrapper {
+    width: 100%;
+    height: 70vh;
+    padding: 1em;
+  .admin--header {
+    text-align: center;
+  }
+  .admin--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    margin-top: 1em; 
+    height: 55vh; 
+  }
+  .admin--info {
+    display: flex;
+    padding-left: 1em;
+    flex-direction: column;
+  }
+  .admin--panel {
+    display: flexbox;
+    width: 90%;
+  }
+  .admin--panel_actions {
+    display: flex;
+    gap: 0.5em;
+    border: 1px solid #ccc;
+    padding: 0.5em;
+    }
+}

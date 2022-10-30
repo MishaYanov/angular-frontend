@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAA;EACT,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,WAAW;EACnB,OAAO,EAAE,GAAG;EACZ,aAAa,EAAE,IAAI;CActB;;AAlBD,AAKI,aALS,CAKT,gBAAgB,CAAA;EACZ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,aAAa,EAAE,GAAG;CASrB;;AAjBL,AASQ,aATK,CAKT,gBAAgB,CAIZ,KAAK,CAAA;EACD,aAAa,EAAE,KAAK;CACvB;;AAXT,AAYQ,aAZK,CAKT,gBAAgB,CAOZ,KAAK,CAAA;EACD,OAAO,EAAE,KAAK;EACd,MAAM,EAAE,cAAc;EACtB,aAAa,EAAE,KAAK;CACvB",
+    "sources": [
+        "add-product-form.component.scss"
+    ],
+    "names": [],
+    "file": "add-product-form.component.css"
+}

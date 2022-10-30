@@ -1,0 +1,10 @@
+.edit--grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 7rem;
+}
+/*# sourceMappingURL=edit-product-form.component.css.map */

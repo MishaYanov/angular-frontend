@@ -1,0 +1,21 @@
+   <!-- <div class="" *ngIf="products.length > 0; then emptyList else itemList"></div> -->
+        <table >
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>description</th>
+                    <th>Category</th>
+                    <th>Car</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody  *ngFor="let product of products | multipleFilterPipe: invokedFilters">
+                <tr app-item [product]="product"></tr>        
+            </tbody>
+        </table> 
+
+    <div class="empty-list">
+        <h3>No products found</h3>
+    </div>

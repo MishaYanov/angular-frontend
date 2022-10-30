@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+p, h1, h2, h3, h4, h5, h6, span, a, li, label, table {
+  color: #fff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+ul, li, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+  height: 1rem;
+  min-width: 7rem;
+  padding: 0.25rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input::-webkit-input-placeholder {
+  color: #494949;
+}
+
+input:-ms-input-placeholder {
+  color: #494949;
+}
+
+input::-ms-input-placeholder {
+  color: #494949;
+}
+
+input::placeholder {
+  color: #494949;
+}
+
+input:focus {
+  outline: #d50000 1px solid;
+}
+
+select {
+  outline: none;
+  border: none;
+  height: 1.5rem;
+  min-width: 7rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+select::-webkit-input-placeholder {
+  color: #494949;
+}
+
+select:-ms-input-placeholder {
+  color: #494949;
+}
+
+select::-ms-input-placeholder {
+  color: #494949;
+}
+
+select::placeholder {
+  color: #494949;
+}
+
+select:focus {
+  outline: #d50000 1px solid;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 1rem;
+}
+/*# sourceMappingURL=styles.css.map */

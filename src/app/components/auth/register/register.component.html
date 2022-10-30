@@ -1,0 +1,140 @@
+<div class="form-wrapper">
+  <form action="POST" [formGroup]="registerForm" class="register_form">
+    <div class="form--header">
+      <h1 class="form--header--title">Register</h1>
+      <p class="form--header--text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+      </p>
+    </div>
+
+    <div class="form--body">
+      <div class="form--body--input">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          formControlName="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+
+      <div class="form--body--input">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          formControlName="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+          min="8"
+        />
+      </div>
+
+      <div class="form--body--input">
+        <label for="password">Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          id="confirmPassword"
+          placeholder="Enter your password"
+          required
+          min="8"
+        />
+      </div>
+
+      <div class="form--body--input">
+        <label for="firstName">Name</label>
+        <input
+          type="text"
+          name="name"
+          formControlName="name"
+          id="name"
+          placeholder="Enter your name"
+          required
+          min="3"
+        />
+      </div>
+
+      <div class="form--body--input">
+        <label for="password">ID Number</label>
+        <input
+          type="text"
+          name="idNumber"
+          formControlName="idNumber"
+          id="idNumber"
+          placeholder="Enter your password"
+          required
+          min="9"
+          max="9"
+        />
+      </div>
+
+      <div class="form--body--input">
+        <label for="password">Address</label>
+        <input
+          type="text"
+          name="address"
+          formControlName="address"
+          id="addres"
+          placeholder="Enter your password"
+          required
+          min="5"
+        />
+      </div>
+
+      <div class="form--body--input">
+        <label for="password">City</label>
+        <input
+          type="text"
+          name="city"
+          formControlName="city"
+          id="city"
+          placeholder="Enter your password"
+          required
+          min="3"
+        />
+      </div>
+      <div class="errors">
+        <div class="error" *ngIf="email?.touched && email?.invalid">
+          <span>Please Input a valid email</span>
+        </div>
+        <div class="error" *ngIf="password?.touched && password?.invalid">
+          <span>Password should be minimum 8 letters</span>
+        </div>
+        <div
+          class="error"
+          *ngIf="confirmPassword?.touched && confirmPassword?.invalid"
+        >
+        <span>Password should be minimum 8 letters</span>
+        </div>
+        <div class="error" *ngIf="registerForm?.errors?.['passwordsNotMatch']"> 
+          <span >Passwords do not match</span>
+        </div>
+        <div class="error" *ngIf="name?.touched && name?.invalid">
+          <span>Name should be minimum 3 letters</span>
+        </div>
+        <div class="error" *ngIf="idNumber?.touched && idNumber?.invalid">
+          <span>ID Number should be 9 digits</span>
+        </div>
+        <div class="error" *ngIf="address?.touched && address?.invalid">
+          <span>Address should be minimum 5 letters</span>
+        </div>
+        <div class="error" *ngIf="city?.touched && city?.invalid">
+          <span>City should be minimum 3 letters</span>
+        </div>
+
+      </div>
+      <div class="form--footer">
+        <app-button
+          customClass="primary"
+          (btnClick)="registerHandler()"
+          text="Register"
+        ></app-button>
+      </div>
+    </div>
+  </form>
+</div>

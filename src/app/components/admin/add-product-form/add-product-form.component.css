@@ -1,0 +1,30 @@
+.add--wrapper {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 1em;
+  margin-bottom: 5rem;
+}
+
+.add--wrapper .add--input_item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.add--wrapper .add--input_item label {
+  margin-bottom: 0.2em;
+}
+
+.add--wrapper .add--input_item input {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+/*# sourceMappingURL=add-product-form.component.css.map */

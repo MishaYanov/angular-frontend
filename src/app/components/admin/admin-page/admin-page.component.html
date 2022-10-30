@@ -1,0 +1,38 @@
+<div class="admin--wrapper">
+  <div class="admin--header">
+    <h2>Hello Admin, In this page you can manage your store.</h2>
+    <p>to manage products in store (delete and update) go to store</p>
+  </div>
+  <div class="admin--grid">
+    <div class="admin--info">
+      <h3>Admin info</h3>
+      <p>Basic info</p>
+      <p><b>Name:</b> {{ user.name }}</p>
+      <p><b>Email:</b> {{ user.email }}</p>
+      <p>
+        <b>More Info:</b>  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        Minima tenetur repellendus, mollitia quo esse totam quod pariatur iure
+        culpa ex perferendis nesciunt cum, minus accusantium unde soluta dolor
+        quam repudiandae.
+      </p>
+    </div>
+    <div class="admin--panel">
+      <div class="admin--panel_actions">
+        <button class="btn btn-primary" (click)="toggleAddForm()">
+          Add Product
+        </button>
+        <button class="btn btn-primary" (click)="toggleAddForm()">
+            Add car type
+        </button>
+        <button class="btn btn-primary" (click)="toggleAddForm()">
+            Add part type
+        </button>
+      </div>
+      <div class="admin--forms">
+        <div class="admin--forms_add" *ngIf="addProducthandler">
+          <app-add-product-form></app-add-product-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.cart_items-counter {
+  width: 1rem !important;
+}
+
+.cart_item {
+  padding: 1rem !important;
+  border-bottom: 1px solid #ccc !important;
+  height: 5rem !important;
+}
+/*# sourceMappingURL=cart-item.component.css.map */

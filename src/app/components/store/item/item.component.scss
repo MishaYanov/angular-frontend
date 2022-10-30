@@ -1,0 +1,49 @@
+    td{
+        border: none;
+        padding: 5px;
+        font-size: 14px;
+        height: inherit;
+    }
+    .item-image{
+        width: 100px;
+        height: 100px;
+    }
+    .item-name{
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .item-price{
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .item-description{
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 10px;
+        height: 100%;
+        height: inherit;
+        p{
+            margin: 0;
+            height: inherit;
+            overflow: scroll;
+        }
+    }
+    .item-action{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .item-add_item_to_cart{
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        &:hover{
+            background-color: #ddb347;
+        }
+    }

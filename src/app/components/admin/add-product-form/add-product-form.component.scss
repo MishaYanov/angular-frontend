@@ -1,0 +1,19 @@
+.add--wrapper{
+    width: 100%;
+    height: max-content;
+    padding: 1em;
+    margin-bottom: 5rem;
+    .add--input_item{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+        label{
+            margin-bottom: 0.2em;
+        }
+        input{
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 0.5em;
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.checkout-wrapper{
+    margin-top: 7rem;
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    .checkout-cart{
+        height: 60vh;
+        overflow-y: scroll;
+        .checkout-cart_items{
+            //table styles from globals
+        }
+    }
+ 
+    .checkout-delivery{
+        height: 60vh;
+        .actions{
+            height: 3rem;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+        //form style from globals
+    }
+}

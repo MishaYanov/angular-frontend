@@ -1,0 +1,132 @@
+<div class="form-wrapper">
+  <div class="edit--grid">
+    <div class="edit--newForm">
+      <form action="POST" [formGroup]="NewValuesForm" class="edit_form">
+        <div class="form--header">
+          <h1 class="form--header--title">Edit Product</h1>
+          <p class="form--header--text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+            quod.
+          </p>
+        </div>
+        <div class="form--body">
+          <div class="form--body--input">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              formControlName="name"
+              id="name"
+              placeholder="Product Name"
+              required
+              min="3"
+            />
+          </div>
+          <div class="form--body--input">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              name="price"
+              formControlName="price"
+              id="price"
+              placeholder="Product Price"
+              required
+              min="1"
+            />
+          </div>
+          <div class="form--body--input">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              name="description"
+              formControlName="description"
+              id="description"
+              placeholder="Product Description"
+              required
+              min="3"
+            />
+          </div>
+          <div class="form--body--input">
+            <label for="image">Image</label>
+            <input
+              type="file"
+              name="image"
+              formControlName="image"
+              id="image"
+              placeholder="Product Image"
+              required
+              min="3"
+            />
+          </div>
+          <div class="form--body--input">
+            <label for="partCategory">Part</label>
+            <select
+              name="partSelector"
+              id="partSelector"
+              formControlName="partCategoryId"
+            >
+              <option value="undefined">Part Categories</option>
+              <option *ngFor="let part of partCategories" [ngValue]="part.id">
+                {{ part.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form--body--input">
+            <label for="carCategory">Car</label>
+            <select
+              name="carSelector"
+              id="carSelector"
+              formControlName="carCategoryId"
+            >
+              <option value="undefined">Car Categories</option>
+              <option *ngFor="let car of carCategories" [ngValue]="car.id">
+                {{ car.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form--footer">
+            <app-button
+              customClass="primary"
+              text="Submit Edit"
+              (click)="editProduct()"
+            ></app-button>
+            <app-button
+              customClass="primary"
+              text="reset"
+              (click)="resetValues()"
+            ></app-button>
+            <app-button
+              customClass="primary"
+              text="cancel"
+              (click)="cancel()"
+            ></app-button>
+          </div>
+        </div>
+      </form>
+      <div class="errors">
+        <div *ngIf="form['image']?.errors?.['invalidImageType']">
+          <p>Image type is invalid</p>
+      </div>
+      <div class="" *ngIf="NewValuesForm.status">
+        <p *ngIf="NewValuesForm.status === 'INVALID'">
+          Please do the requried validations
+        </p>
+      </div>
+      </div>
+    </div>
+    <div class="edit--oldProduct">
+      <div class="edit--oldProduct--grid">
+        <div class="edit--oldProduct--image">
+          <img src="https://via.placeholder.com/150" alt="" />
+        </div>
+        <div class="edit--oldProduct--info">
+          <h3>Product Name: {{ product?.name }}</h3>
+          <p>Price: {{ product?.price }}$</p>
+          <p>Description: {{ product?.description }}</p>
+          <p>Category: {{ product?.partCategory.name }}</p>
+          <p>Car: {{ product?.carCategory.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

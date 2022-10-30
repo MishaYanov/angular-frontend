@@ -1,0 +1,66 @@
+td {
+  border: none;
+  padding: 5px;
+  font-size: 14px;
+  height: inherit;
+}
+
+.item-image {
+  width: 100px;
+  height: 100px;
+}
+
+.item-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.item-price {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.item-description {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  height: 100%;
+  height: inherit;
+}
+
+.item-description p {
+  margin: 0;
+  height: inherit;
+  overflow: scroll;
+}
+
+.item-action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.item-add_item_to_cart {
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.item-add_item_to_cart:hover {
+  background-color: #ddb347;
+}
+/*# sourceMappingURL=item.component.css.map */

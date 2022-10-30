@@ -1,0 +1,47 @@
+<div class="form-wrapper">
+  <form action="POST" [formGroup]="loginForm" class="login_form">
+    <div class="form--header">
+      <h1 class="form--header--title">Login</h1>
+      <p class="form--header--text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+      </p>
+    </div>
+    <div class="form--body">
+      <div class="form--body--input">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          name="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+      <div class="form--body--input">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          name="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+          min="8"
+        />
+      </div>
+      <div class="errors">
+        <div class="error" *ngIf="email?.touched && email?.invalid"><span>Please Input a valid email</span></div>
+        <div class="error" *ngIf="password?.touched && password?.invalid"><span>Password should be minimum 8 letters</span></div>
+      </div>
+    </div>
+    <div class="validators"></div>
+    <div class="form--footer">
+      <app-button
+        customClass="primary"
+        (btnClick)="loginHandler()"
+        text="Login"
+      ></app-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+table {
+  width: 95%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  margin: 1rem;
+  margin-bottom: 5rem;
+}
+
+table thead {
+  border: none;
+  padding: 30px;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+table tbody {
+  gap: 1rem;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+}
+
+table tbody tr, table tbody td {
+  height: 5rem;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=item-list.component.css.map */

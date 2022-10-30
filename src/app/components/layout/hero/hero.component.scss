@@ -1,0 +1,33 @@
+.hero-wrapper{
+    width: 100vw;
+    height: calc(100vh - 25vh);
+}
+.hero{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.hero__content{
+    display: flex;
+    flex-direction: column;
+    padding: 0 5vw;
+}
+.hero__title{
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 25px;
+}
+.hero__text{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 45px;
+}
+.hero__actionbar{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;    
+    align-items: center;
+    padding: 0 5vw;
+    margin-top: 3rem;
+}

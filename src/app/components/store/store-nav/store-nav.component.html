@@ -1,0 +1,33 @@
+<div class="store-nav-wrapper">
+    <div class="store-nav__user">
+        <div class="store-nav__user__name">
+            <span>Hi, {{userName}}</span>
+        </div>
+    </div>
+    <div class="store-nav__filters">
+        <div class="store-nav__filters_search">
+            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchValue" (input)="setSearchValue($event)">
+        </div>
+        <div class="store-nav__filters_part-categories">
+            <select name="partSelector" id="partSelector" [(ngModel)]="selectedPart">
+                <option value="undefined">Part Categories</option>
+                <option *ngFor="let part of partCategories" [value]="part.name">{{part.name}}</option>
+            </select>
+        </div>
+        <div class="store-nav__filters_car-categories">
+            <select name="carSelector" id="carSelector" [(ngModel)]="selectedCar">
+                <option [ngValue]="undefined">Car Categories</option>
+                <option *ngFor="let car of carCategories" [ngValue]="car.name">{{car.name}}</option>
+            </select>
+        </div>
+        <div class="store-nav__filters_submit">
+            <button class="btn btn-primary" (click)="FilterHandler()">Filter</button>
+            <button class="btn btn-primary" (click)="resetHandler()">reset</button>
+
+        </div>
+    </div>
+    <div class="cart">
+        <a [routerLink]="['/cart']"><mat-icon class="material-icons medium">shopping_cart</mat-icon></a>
+        <div class="items-in-cart"><span>{{cartItemsCounter}}</span></div>
+    </div>
+</div>

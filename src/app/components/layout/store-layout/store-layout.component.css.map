@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "store-layout.component.scss"
+    ],
+    "names": [],
+    "file": "store-layout.component.css"
+}

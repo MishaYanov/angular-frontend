@@ -1,0 +1,62 @@
+header {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  color: #fff;
+  text-align: center;
+  width: 100vw;
+  height: 12vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+nav a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  padding: 1rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+nav ul li a:hover {
+  color: #f00;
+  cursor: pointer;
+}
+
+nav ul li .active-link {
+  background-color: #f00;
+  color: whitesmoke;
+}
+/*# sourceMappingURL=header.component.css.map */

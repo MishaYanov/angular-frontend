@@ -1,0 +1,30 @@
+<div class="cart-wrapper">
+    <div class="cart-header">
+        <div class="cart-header__title">
+            <h2>Cart</h2>
+        </div>
+        <div class="cart-header__total">
+            <!-- <h2>Total: {{totalPrice | currency}}</h2> -->
+        </div>
+    </div>
+        <div class="cart-table">
+                <table>
+                    <thead class="cart-head">
+                        <td>Product</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                        <td>actions</td>
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="let cartItem of cartItems" app-cart-item [cartItem]="cartItem"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="cart-controllers">
+            <div class="cart-controllers__checkout">
+                <button class="btn btn-primary" (click)="InvokeCheckout()">Checkout</button>
+                <button (click)="resetCart()">reset</button>
+            </div>
+</div>
