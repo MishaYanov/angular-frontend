@@ -24,6 +24,8 @@ export class SharedCartService {
   public cartItems$ = new BehaviorSubject<CartItemModel[]>([]);
 
   public delivery$ = new BehaviorSubject<DeliveryModel>({});
+  
+  public modalControl$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private cartService: CartService,
@@ -42,6 +44,13 @@ export class SharedCartService {
 
   get cartValue(): CartModel {
     return this.cart$.value;
+  }
+  //modal control
+  set updateModalControl(value: boolean) {
+    this.modalControl$.next(value);
+  }
+  get modalControlValue(){
+    return this.modalControl$.value;
   }
 
   // cart items

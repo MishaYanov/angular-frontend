@@ -1,0 +1,28 @@
+.goodbye {
+  width: 60vw;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 1rem;
+  margin: auto;
+}
+
+.goodbye .end-container {
+  padding-top: 3rem;
+  width: 50vw;
+  margin: auto;
+}
+
+.goodbye .end-container .end-header {
+  height: 3rem;
+}
+
+.goodbye .end-container .end-body {
+  padding-left: 0.5rem;
+}
+
+.goodbye .end-container .end-footer {
+  text-align: center;
+  height: 2rem;
+}
+/*# sourceMappingURL=end-journey.component.css.map */

@@ -1,7 +1,11 @@
+
 .checkout-wrapper{
-    margin-top: 7rem;
+    margin-top: 5rem;
     display: grid;
     grid-template-columns: 2fr 4fr;
+    height: 80vh;
+    gap: 3rem;
+    padding: 0 6rem;
     .checkout-cart{
         height: 60vh;
         overflow-y: scroll;
@@ -12,12 +16,13 @@
  
     .checkout-delivery{
         height: 60vh;
+        width: 100%;
         .actions{
             height: 3rem;
             display: flex;
             flex-direction: row;
             gap: 1rem;
         }
-        //form style from globals
+            
     }
 }

@@ -7,28 +7,22 @@
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.401);
 }
+
 .final-wrapper {
   position: relative;
   width: 50vw;
   height: 50vh;
   margin-top: 4rem;
   left: 50%;
-  background-color: rgb(157, 209, 255);
+  background-color: #9dd1ff;
   z-index: 400;
   padding: 1rem;
-  .header {
-    h3{
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: 400;
-        text-decoration: underline;
-    }
-  }
-  .body {
-    .cardinfo {
-    }
-  }
-
-  .action-bar {
-  }
 }
+
+.final-wrapper .header h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-decoration: underline;
+}
+/*# sourceMappingURL=finalize-sale.component.css.map */

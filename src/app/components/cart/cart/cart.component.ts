@@ -1,4 +1,5 @@
 import { Component, DoCheck, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedCartService } from '../../shared/services/shared-cart.service';
 import { CartModel } from '../models/cart.model';
 import { CartItemModel } from '../models/CartItem.model';
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit, DoCheck {
   public cartItems: CartItemModel[] = [];
 
 
-  constructor(private shareCart: SharedCartService, private Cdiff: KeyValueDiffers) { }
+  constructor(private shareCart: SharedCartService, private Cdiff: KeyValueDiffers, private router: Router, private route: ActivatedRoute, ) { }
 
   ngOnInit(): void {
     this.checkIfCartExists();
@@ -38,7 +39,9 @@ export class CartComponent implements OnInit, DoCheck {
     }
   }
   InvokeCheckout(){
+    console.log('checkout');
     
+    this.router.navigate(['/checkout'], {relativeTo:this.route});
   }
   resetCart(){
     this.shareCart.resetCart();

@@ -1,6 +1,10 @@
-<div class="" *ngIf="true;">
-  <app-finalize-sale></app-finalize-sale>
+<div class="" style="position: relative;">
+  <div style="position: absolute;" class="modal" *ngIf="true">
+    <app-finalize-sale></app-finalize-sale>
+  </div>
 </div>
+
+
 
 <div class="checkout-wrapper">
   <div class="checkout-cart">
@@ -12,56 +16,48 @@
           <td>price</td>
         </thead>
         <tbody>
-          <!-- looping items -->
-          <tr></tr>
+          <tr *ngFor="let item of cart?.cartItems">
+            <td>{{item.product?.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.totalPrice}}</td>
+          </tr>
         </tbody>
       </table>
       <div class="metrics">
-        <div class="">Total Items:</div>
-        <div class="">Total Price:</div>
+        <div class=""><p>Total Items: {{totalItems}}</p></div>
+        <div class=""><p>Total Price: {{totalPrice}}</p></div>
       </div>
     </div>
   </div>
   <div class="checkout-delivery">
     <div class="actions">
       <button (click)="invokeSavedAddress()">Use Saved Address</button>
-      <!-- <button (click)="resetDelivery()">Reset Ipunts</button> -->
-      <!-- <button (click)="saveDelivery()">Save Delivery Info</button> -->
-      <!-- <button (click)="(saveAndExit)"> -->
-        <!-- Save delivery details and go back to store -->
-      <!-- </button> -->
+      <button (click)="resetDelivery()">Reset Ipunts</button>
+      <button (click)="saveDelivery()">Save Delivery Info</button>
+      <button (click)="(saveAndExit)">
+        Save delivery details and go back to store
+      </button>
     </div>
     <h2>Delivery Information</h2>
-    <form action="">
-      <div class="">
-        <label for="">
-        <input type="text" name="" id="" /></label>
+    <form action="" [formGroup]="newDelivery">
+      <div class="form--body">
+      <div class="form--body--input">
+        <label for="city">City</label>
+        <input type="text" name="city" id="" formControlName="city">
       </div>
-      <div class="">
-        <label for="">
-        <input type="text" name="" id="" /></label>
+      <div class="form--body--input">
+        <label for="">ddress</label>
+        <input type="text" name="" id="" formControlName="address"/>
       </div>
-      <div class="">
-        <label for="">
-        <input type="text" name="" id="" /></label>
-      </div>
-      <div class="">
-        <label for="">
-        <input type="text" name="" id="" /></label>
-      </div>
-      <div class="">
-        <label for="">
-        <input type="text" name="" id="" /></label>
-      </div>
-      <div class=""></div>
+    </div>
     </form>
-  </div>
   <div class="action-bar">
     <div class="delete">
-      <!-- <button (click)="deleteCartAndDelivery()">Delete Cart</button> -->
+      <button (click)="deleteCartAndDelivery()">Delete Cart</button>
     </div>
     <div class="submit-cart">
-      <!-- <button (click)="submitInfo()">Submit</button> -->
+      <button (click)="submitInfo()">Submit</button>
     </div>
   </div>
+</div>
 </div>
