@@ -1,3 +1,5 @@
+@import '../../../../styles/styles.scss';
+
 .modal-bacground {
   position: absolute;
   top: 0;
@@ -13,7 +15,8 @@
   height: 50vh;
   margin-top: 4rem;
   left: 50%;
-  background-color: rgb(157, 209, 255);
+  background-color: $secondary-color;
+  border-radius: 2rem;
   z-index: 400;
   padding: 1rem;
   .header {
@@ -25,10 +28,54 @@
     }
   }
   .body {
+    .row{
+      display: flex;
+      flex-direction: row;
+    }
     .cardinfo {
+      .accepted-cards{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      form{
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        .payment-item{
+          width: 80%;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: baseline;
+          input{
+            width: 90%;
+          }
+          .pay-cvv{
+            margin: 0;
+            align-self: start;
+            width: inherit;
+            display: flex;
+            gap: 4rem;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+        }
+      }
     }
   }
-
+.short{
+  width: 30% !important;
+}
   .action-bar {
+    margin: 1rem auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
   }
 }
+
+

@@ -78,6 +78,11 @@
         background-color: $primary-dark-color;
       }
     }
+    .store-nav__filters_submit{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
   }
   .cart {
     height: 46px;

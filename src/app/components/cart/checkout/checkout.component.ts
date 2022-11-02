@@ -6,6 +6,9 @@ import { CartModel } from '../models/cart.model';
 import { CartItemModel } from '../models/CartItem.model';
 import { DeliveryModel } from '../models/delivery.model';
 import jwt_decode from 'jwt-decode';
+import { CartService } from '../services/cart.service';
+import { Router } from '@angular/router';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -20,11 +23,13 @@ export class CheckoutComponent implements OnInit {
     address: new FormControl(),
   });
 
-  public Cmodal = this.sharedCart.modalControlValue;
+  public Cmodal = false;
+
   //add cart model use shared-cart
-  public cart?: CartModel;
+  public cart?: CartModel | any;
   public totalPrice: number = 0;
   public totalItems: number = 0;
+
   //add delivery model and shared-cart
   public newDelivery = new FormGroup({
     city: new FormControl('', Validators.required),
@@ -34,12 +39,13 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private sharedUser: SharedUserService,
-    private sharedCart: SharedCartService
+    private sharedCart: SharedCartService,
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     //check if cart exists? no - pull cart
-
     this.sharedCart.cartObservable.subscribe((data: any) => {
       this.cart = data;
       console.log(this.cart);
@@ -57,6 +63,7 @@ export class CheckoutComponent implements OnInit {
       await this.sharedCart.pullCartForUser();
     }
   }
+
   async invokeSavedAddress() {
     const decoded: any = await this.decodeUserToken();
     console.log(decoded);
@@ -75,7 +82,7 @@ export class CheckoutComponent implements OnInit {
   async saveDelivery() {
     const decoded: any = await this.decodeUserToken();
     console.log(decoded);
-    if (this.newDelivery.valid) {
+    if (this.newDelivery.valid) { //validation
       const decoded: any = await this.decodeUserToken();
       console.log(decoded);
       const newDelivery: DeliveryModel = {
@@ -86,24 +93,39 @@ export class CheckoutComponent implements OnInit {
         cartId: this.cart?.id,
       };
       console.log(newDelivery);
+      if(newDelivery){
+        this.sharedCart.updateHandelr();
+      }
+      alert("New delivery saved!")
     } else {
       console.log('invalid form');
     }
   }
 
   async saveAndExit() {
-    await this.saveDelivery();
+    try{
+      await this.saveDelivery();
+    }catch (err) {
+      console.error("error in delvivery update: " + err)
+    }
     //navigate to store
+    this.router.navigate(['/store']);
   }
 
-  deleteCartAndDelivery() {
+  async deleteCartAndDelivery() {
     //reset fields.
     //delete cart + create new cart
+    await this.sharedCart.resetCart();
+    this.totalItems = 0;
+    this.totalPrice = 0;
+    const response = await this.cartService.removeDelivery(this.sharedUser.userValue.id!);
+    alert("CART RESETTED! you have nothing to do here please return to store")
   }
 
-  submitInfo() {
+  async submitInfo() {
+    await this.sharedCart.updateHandelr();
     this.Cmodal = true;
-    this.sharedCart.updateModalControl = this.Cmodal;
+    
   }
 
   private async decodeUserToken() {
@@ -114,5 +136,8 @@ export class CheckoutComponent implements OnInit {
     } else {
       return null;
     }
+  }
+  closeModalHandler(){
+    this.Cmodal =false;
   }
 }

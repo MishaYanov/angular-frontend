@@ -8,6 +8,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { CartComponent } from './components/cart/cart/cart.component';
 import { CheckoutComponent } from './components/cart/checkout/checkout.component';
+import { EndJourneyComponent } from './components/cart/end-journey/end-journey.component';
 import { ContactMeComponent } from './components/layout/contact-me/contact-me.component';
 import { HeroComponent } from './components/layout/hero/hero.component';
 import { NotFoundPageComponent } from './components/layout/not-found-page/not-found-page.component';
@@ -24,12 +25,15 @@ const routes: Routes = [
   {path: "store", component: StoreLayoutComponent, canActivate: [LoggedInGuard], children: []},
   
   {path: "cart", component: CartComponent, canActivate: [LoggedInGuard], children: []},
-  {path: "checkout", component: CheckoutComponent},
+  {path: "checkout", component: CheckoutComponent, canActivate: [LoggedInGuard]},
+  {path: 'goodbye', component: EndJourneyComponent, canActivate: [LoggedInGuard]},
+
   //admin routes
   {path: "admin", component: AdminPageComponent, canActivate: [AdminGuard], children: []},
   {path: "admin/edit-product/:id", component: EditProductFormComponent, canActivate: [AdminGuard], children: []},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', component: NotFoundPageComponent}
+  {path: '**', component: NotFoundPageComponent},
+
 ];
 
 @NgModule({

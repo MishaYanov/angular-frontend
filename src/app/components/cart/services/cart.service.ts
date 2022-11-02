@@ -33,5 +33,7 @@ public removeItemFromCart(cartId: number, cartItemId: number): any {
   public deleteCart(id: number): any {
     return this.http.delete(`http://localhost:3000/cart/${id}`);
   }
-
+  public removeDelivery(id: number): any{
+    return this.http.delete('http://localhost:3000/cart/delivery/:id');
+  }
 }

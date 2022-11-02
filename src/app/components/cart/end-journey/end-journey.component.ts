@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,9 +17,12 @@ export class EndJourneyComponent implements OnInit {
     userId: new FormControl(''), //custom validator
   })
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+  navigateToStore(){
+    this.router.navigate(['store'])
   }
 
 }

@@ -55,7 +55,7 @@ export class ItemComponent implements OnInit {
         }
     }
   }
-  addItemTocart() {
+  async addItemTocart() {
     //check if item in cart
     const curItemsInCart = this.sharedCart.cartItemsValue;
     let itemInCart = false;
@@ -81,13 +81,14 @@ export class ItemComponent implements OnInit {
       this.sharedCart.updateCart = {
         ...this.sharedCart.cartValue, cartItems: [...curItemsInCart, cartItem]
       }
-      this.sharedCart.updateHandelr();
+      await this.sharedCart.updateHandelr();
     }else if(itemInCart){
       this.sharedCart.updateCartItems = curItemsInCart;
       this.sharedCart.updateCart = {
         ...this.sharedCart.cartValue, cartItems: curItemsInCart
       }
-      this.sharedCart.updateHandelr();
+      await this.sharedCart.updateHandelr();
+      debugger
     }
   }
 
@@ -104,10 +105,10 @@ export class ItemComponent implements OnInit {
         ...this.sharedCart.cartValue, cartItems: curItemsInCart
       }
       this.cart.removeItemFromCart(this.sharedCart.cartValue.id! ,itemInCart.id!).subscribe(
-        (data:any) => {
+        async (data:any) => {
           console.log(data['msg']);
           if(data['msg'] === 'Item deleted'){
-            this.sharedCart.updateHandelr();
+            await this.sharedCart.updateHandelr();
           }
         }
       );

@@ -1,3 +1,5 @@
+@import '../../../../styles/forms.scss';
+
 
 .checkout-wrapper{
     margin-top: 5rem;
@@ -25,4 +27,34 @@
         }
             
     }
+
+    .form--body{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+        .form--body--input{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            label{
+                width: 4rem;
+            }
+        }
+    }
+    .action-bar{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 2rem;
+        width: 100%;
+        height: 3rem;
+    }
+}
+.btn-small{
+    font-size: 12px !important;
+    padding: 0.2rem !important;
+    height: 2rem;
 }

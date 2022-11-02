@@ -5,27 +5,36 @@
   </div>
   <div class="body">
     <div class="cardinfo">
+      <div class="accepted-cards"></div>
       <form action="">
-        <div class="">
-          <label for="">Card Number</label>
-            <input type="text" name="" id="">
+
+          <div class="payment-item ">
+            <label class="pay-label" for="">Card Number</label>
+            <input type="text" name="" id="" />
           </div>
-          <div class="">
-            <label for="">Exp. Date</label>
-              <input type="text" name="" id="">
+
+          <div class="payment-item">
+            <label class="pay-label" for="">user Id</label>
+            <input type="text" name="" id="" />
+          </div>
+
+          <div class="payment-item">
+            <label class="pay-label" for="">Exp. Date</label>
+            <input type="text" name="" id="" />
+          </div>
+
+          <div class="payment-item short">
+            <label class="pay-label" for="">CVV</label>
+            <div class="pay-cvv">
+              <input type="text" name="" id="" />
+            
             </div>
-            <div class="">
-              <label for="">CVV</label>
-                <input type="text" name="" id="">
-              </div>
-              <div class="">
-                <label for="">user Id</label>
-                  <input type="text" name="" id="">
-                </div>
+          </div>
+        
       </form>
       <div class="action-bar">
-        <button>Back</button>
-        <button>Submit</button>
+        <button class="btn sec" (click)="closeModal()">Back</button>
+        <button class="btn main" (click)="submit()">Submit</button>
       </div>
     </div>
   </div>

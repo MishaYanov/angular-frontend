@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, IterableDiffers, KeyValueDiffer, OnInit, Output } from '@angular/core';
+import { defaultRippleAnimationConfig } from '@angular/material/core';
 import { CartService } from '../../cart/services/cart.service';
 import { SharedCartService } from '../../shared/services/shared-cart.service';
 import { SharedProductService } from '../../shared/services/shared-product.service';
@@ -11,7 +12,7 @@ import { StoreService } from '../services/store.service';
   templateUrl: './store-nav.component.html',
   styleUrls: ['./store-nav.component.scss'],
 })
-export class StoreNavComponent implements OnInit {
+export class StoreNavComponent implements OnInit, DoCheck {
   public carCategories: carCategories[] = [];
   public partCategories: partCategories[] = [];
 
@@ -20,15 +21,21 @@ export class StoreNavComponent implements OnInit {
   public selectedPart?: any;
   public searchValue?: string;
 
+  public userName = this.shared.userValue.name;
+  public cartItemsCounter?:any = 0;
+  private ldiff:any;
+
   constructor(
     private shared: SharedUserService,
     private store: StoreService,
     private sharedProd: SharedProductService,
-    private sharedCart: SharedCartService
-  ) {}
+    private sharedCart: SharedCartService,
+    differs: IterableDiffers
+  ) {
+    this.ldiff = differs.find([]).create();
 
-  public userName = this.shared.userValue.name;
-  public cartItemsCounter? = 0;
+  }
+
 
 
 
@@ -52,15 +59,14 @@ export class StoreNavComponent implements OnInit {
       }
     );
     //get cart and update cart fileds
-    await this.sharedCart.pullCartForUser();
-    console.log(this.sharedCart.cartValue);
-    
-    this.sharedCart.cartObservable.subscribe((data) => {
-      console.log(data);
-      
-      this.cartItemsCounter = data?.cartItems?.length;
-    });
-    console.log(this.cartItemsCounter, this.sharedCart.cartItemsValue);
+    if(this.sharedCart.cartItemsValue.length === 0){
+      await this.sharedCart.pullCartForUser();
+    }
+  }
+  ngDoCheck(){
+    if(this.sharedCart.cartItemsValue.length != undefined){
+      this.cartItemsCounter = this.sharedCart.cartItemsValue.length;
+    }
   }
   
   setSearchValue(event: any): void {

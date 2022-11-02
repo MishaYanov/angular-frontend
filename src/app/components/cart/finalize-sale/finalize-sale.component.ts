@@ -1,4 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { SharedCartService } from '../../shared/services/shared-cart.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { RegexValidators } from '../validators/regex.validators';
+
 
 @Component({
   selector: 'app-finalize-sale',
@@ -7,17 +12,26 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 })
 export class FinalizeSaleComponent implements OnInit, OnDestroy {
 
-  private flag = false;
+  @Output() btnClick: any = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+   cardMember = new FormGroup({
+     cardNumber: new FormControl('', [Validators.required]),
+     date: new FormControl(),
+     CVV: new FormControl(0, [Validators.min(100), Validators.max(999)]),
+     id: new FormControl()
+   })
 
   ngOnInit(): void {
   }
   ngOnDestroy(): void {
-      this.flag = false;
   }
 
   closeModal(){
-    this.flag = false;
+    this.btnClick.emit();
+  }
+  submit(){
+    this.router.navigate(['goodbye'])
   }
 }

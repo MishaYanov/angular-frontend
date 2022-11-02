@@ -1,9 +1,9 @@
 <div class="" style="position: relative;">
-  <div style="position: absolute;" class="modal" *ngIf="true">
-    <app-finalize-sale></app-finalize-sale>
+  <div style="position: absolute;" class="modal" *ngIf="Cmodal">
+    <app-finalize-sale (btnClick)="closeModalHandler()"></app-finalize-sale>
   </div>
 </div>
-
+<!-- Cmodal -->
 
 
 <div class="checkout-wrapper">
@@ -31,10 +31,10 @@
   </div>
   <div class="checkout-delivery">
     <div class="actions">
-      <button (click)="invokeSavedAddress()">Use Saved Address</button>
-      <button (click)="resetDelivery()">Reset Ipunts</button>
-      <button (click)="saveDelivery()">Save Delivery Info</button>
-      <button (click)="(saveAndExit)">
+      <button class="btn sec btn-small" (click)="invokeSavedAddress()">Use Saved Address</button>
+      <button class="btn sec btn-small" (click)="resetDelivery()">Reset Ipunts</button>
+      <button class="btn sec btn-small" (click)="saveDelivery()">Save Delivery Info</button>
+      <button class="btn sec btn-small" (click)="saveAndExit()">
         Save delivery details and go back to store
       </button>
     </div>
@@ -53,10 +53,10 @@
     </form>
   <div class="action-bar">
     <div class="delete">
-      <button (click)="deleteCartAndDelivery()">Delete Cart</button>
+      <button class="btn sec" (click)="deleteCartAndDelivery()">Delete Cart</button>
     </div>
     <div class="submit-cart">
-      <button (click)="submitInfo()">Submit</button>
+      <button class="btn main" (click)="submitInfo()">Submit</button>
     </div>
   </div>
 </div>

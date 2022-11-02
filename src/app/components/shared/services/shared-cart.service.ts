@@ -124,17 +124,15 @@ export class SharedCartService {
       delivery: this.cartValue.delivery,
       cartItems: this.cartValue.cartItems,
     };
-    console.log(newCart);
     await this.cartService.updateCart(this.cartValue.id!, newCart).subscribe(
-      (data: any) => {
+      async (data: any) => {
         if(data){
-        console.log(data);
-        debugger
-       this.updateCartForUser(data);
+       await this.updateCartForUser(data);
       }else{
         console.log('no data');
       }
       });
+
   }
 
   async resetCart(){
@@ -151,4 +149,5 @@ export class SharedCartService {
         });
     });
   }
+  
 }

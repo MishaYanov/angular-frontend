@@ -17,25 +17,24 @@ export class CartComponent implements OnInit, DoCheck {
 
   constructor(private shareCart: SharedCartService, private Cdiff: KeyValueDiffers, private router: Router, private route: ActivatedRoute, ) { }
 
-  ngOnInit(): void {
-    this.checkIfCartExists();
-    this.shareCart.cartObservable.subscribe((data: any) => {
-      this.cartItems = data.cartItems;
-    });
-    // this.cartItems = this.shareCart.cartItemsValue;
+  async ngOnInit(): Promise<void> {
+    await this.checkIfCartExists();
+    // this.shareCart.cartObservable.subscribe((data: any) => {
+    //   this.cartItems = data.cartItems;
+    // });
+    this.cartItems = this.shareCart.cartItemsValue;
     this.cartDiffrenceDetector = this.Cdiff.find(this.cartItems).create();
   }
-  private checkIfCartExists() {
+  private async checkIfCartExists() {
     if(this.cartItems.length === 0 ){
-      this.shareCart.pullCartForUser();
+      await this.shareCart.pullCartForUser()
+      this.cartItems = this.shareCart.cartItemsValue;
     }
   }
   ngDoCheck() {
     const changes = this.cartDiffrenceDetector?.diff(this.cartItems);
-    if (changes) {
-      console.log(changes);
-      
-      // this.cartItems = this.shareCart.cartItemsValue;
+    if (changes || this.cartItems.length === 0) {
+      this.cartItems = this.shareCart.cartItemsValue;
     }
   }
   InvokeCheckout(){
@@ -43,7 +42,8 @@ export class CartComponent implements OnInit, DoCheck {
     
     this.router.navigate(['/checkout'], {relativeTo:this.route});
   }
-  resetCart(){
-    this.shareCart.resetCart();
+  async resetCart(){
+    await this.shareCart.resetCart();
+    this.cartItems = this.shareCart.cartItemsValue;
   }
 }
