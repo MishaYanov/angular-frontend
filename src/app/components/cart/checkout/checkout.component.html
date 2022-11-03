@@ -50,6 +50,9 @@
         <input type="text" name="" id="" formControlName="address"/>
       </div>
     </div>
+    <div class="errors" *ngIf="!newDelivery.valid && (newDelivery.get('city')?.touched || newDelivery.get('addres')?.touched)">
+      <span><h3 style="color: red;">NOT VALID - Please enter city and address</h3></span>
+    </div>
     </form>
   <div class="action-bar">
     <div class="delete">

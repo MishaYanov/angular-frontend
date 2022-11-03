@@ -18,12 +18,20 @@ export class SharedCartService {
     delivery: undefined,
     cartItems: this._cartItems,
   };
+  private _delivery: DeliveryModel ={
+    id: undefined,
+    city: undefined,
+    address: undefined,
+    userId: undefined,
+    cartId: undefined,
+    price: undefined
+  }
 
   public cart$ = new BehaviorSubject<CartModel>(this._cart);
 
   public cartItems$ = new BehaviorSubject<CartItemModel[]>([]);
 
-  public delivery$ = new BehaviorSubject<DeliveryModel>({});
+  public delivery$ = new BehaviorSubject<DeliveryModel>(this._delivery);
   
   public modalControl$ = new BehaviorSubject<boolean>(false);
 
@@ -112,8 +120,10 @@ export class SharedCartService {
     localStorage.setItem('cartToken', JSON.stringify(newCart));
     this.updateCart = newCart;
     console.log(newCart);
-    this.updateCartItems = newCart.cartItems;
+    this.updateCartItems = newCart.cartItems;    
     this.updateDelivery = newCart.delivery;
+    console.log(newCart.delivery);
+
 
   }
   
@@ -124,6 +134,8 @@ export class SharedCartService {
       delivery: this.cartValue.delivery,
       cartItems: this.cartValue.cartItems,
     };
+    console.log(newCart);
+    
     await this.cartService.updateCart(this.cartValue.id!, newCart).subscribe(
       async (data: any) => {
         if(data){

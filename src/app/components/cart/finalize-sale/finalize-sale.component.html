@@ -6,32 +6,38 @@
   <div class="body">
     <div class="cardinfo">
       <div class="accepted-cards"></div>
-      <form action="">
+      <form action="" [formGroup]="cardMember">
 
           <div class="payment-item ">
             <label class="pay-label" for="">Card Number</label>
-            <input type="text" name="" id="" />
+            <input type="text" name="" id="" formControlName="cardNumber" placeholder="try 4xxxxxxxxxxxxxxx"/>
           </div>
 
           <div class="payment-item">
-            <label class="pay-label" for="">user Id</label>
-            <input type="text" name="" id="" />
+            <label class="pay-label" for="" formControlName="">user Id</label>
+            <input type="text" name="" id="" formControlName="id" placeholder="use user id: 100000000/100000001 for recorded users"/>
           </div>
 
           <div class="payment-item">
-            <label class="pay-label" for="">Exp. Date</label>
-            <input type="text" name="" id="" />
+            <label class="pay-label" for="" >Exp. Date</label>
+            <input type="month" formControlName="date">
           </div>
 
           <div class="payment-item short">
             <label class="pay-label" for="">CVV</label>
             <div class="pay-cvv">
-              <input type="text" name="" id="" />
-            
+              <input type="text" name="" id="" formControlName="CVV" />
             </div>
           </div>
-        
+          
+          <div class="errors" *ngIf="!cardMember.valid && (cardMember?.get('date')?.touched || cardMember?.get('CVV')?.touched || cardMember?.get('id')?.touched || cardMember?.get('cardNumber')?.touched)">
+            <span *ngIf="!cardMember.valid"><p>Invalid inputs</p></span>
+            <span *ngIf="cardMember?.errors?.['cardDateMissmatch']"> <p> Wrong Date config</p></span>
+            <span *ngIf="cardMember?.errors?.['CardNumberMissmatch']" ><p>Wrong Card Number </p></span>
+            <span *ngIf="cardMember?.errors?.['userIdMismatch']" ><p> Id doesnt match</p></span>
+          </div>
       </form>
+
       <div class="action-bar">
         <button class="btn sec" (click)="closeModal()">Back</button>
         <button class="btn main" (click)="submit()">Submit</button>

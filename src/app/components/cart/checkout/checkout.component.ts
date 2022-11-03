@@ -19,8 +19,8 @@ export class CheckoutComponent implements OnInit {
   @Output() completeCart: any = {};
 
   deliveryForm: any = new FormGroup({
-    city: new FormControl(),
-    address: new FormControl(),
+    city: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
   });
 
   public Cmodal = false;
@@ -94,6 +94,11 @@ export class CheckoutComponent implements OnInit {
       };
       console.log(newDelivery);
       if(newDelivery){
+        debugger
+        this.sharedCart.updateDelivery = newDelivery;
+        this.sharedCart.updateCart = {
+          ...this.sharedCart.cartValue, delivery: newDelivery
+        }
         this.sharedCart.updateHandelr();
       }
       alert("New delivery saved!")
@@ -123,9 +128,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   async submitInfo() {
-    await this.sharedCart.updateHandelr();
-    this.Cmodal = true;
-    
+    if(this.newDelivery.valid){
+      await this.sharedCart.updateHandelr();
+      this.Cmodal = true;
+    }  
   }
 
   private async decodeUserToken() {
