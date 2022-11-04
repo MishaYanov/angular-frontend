@@ -15,39 +15,39 @@ export class AddProductFormComponent implements OnInit {
 
   public carCategories: any = [];
   public partCategories: any = [];
-  public selectedCar?:any;
-  public selectedPart?:any;
+  public selectedCar?: any;
+  public selectedPart?: any;
 
-  @ViewChild("fileInput") fileInput:any;
+  @ViewChild("fileInput") fileInput: any;
 
-  public newProductForm= new FormGroup({
-    name: new FormControl('',[
+  public newProductForm = new FormGroup({
+    name: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50),
     ]),
-    price: new FormControl('',[
+    price: new FormControl('', [
       Validators.required,
       Validators.min(0),
 
     ]),
-    description: new FormControl('',[
+    description: new FormControl('', [
       Validators.minLength(3),
       Validators.maxLength(500),
     ]),
-    carCategoryId: new FormControl('',[
+    carCategoryId: new FormControl('', [
       Validators.required,
     ]),
-    partCategoryId: new FormControl('',[
+    partCategoryId: new FormControl('', [
       Validators.required,
     ]),
-    image: new FormControl('',[
+    image: new FormControl('', [
       ProductValidator.imageTypeValidator,
     ]),
-  
+
   });
 
-  get form(){
+  get form() {
     return this.newProductForm.controls;
   }
 
@@ -56,62 +56,62 @@ export class AddProductFormComponent implements OnInit {
   constructor(private store: StoreService, private router: Router, private sharedProduct: SharedProductService,) { }
 
   ngOnInit(): void {
-    if(this.sharedProduct.carCategoriesValue.length > 0){
-    this.sharedProduct.carCategoriesObservable.subscribe((data: any) => {
-      this.carCategories = data;
-    });
-  }else{ //incase of refresh call in admin page call and set the value
-    this.store.getCarTypes().subscribe((data: any) => {
-      this.carCategories = data;
-      this.sharedProduct.updateCarCategories = data;
-    });
+    if (this.sharedProduct.carCategoriesValue.length > 0) {
+      this.sharedProduct.carCategoriesObservable.subscribe((data: any) => {
+        this.carCategories = data;
+      });
+    } else { //incase of refresh call in admin page call and set the value
+      this.store.getCarTypes().subscribe((data: any) => {
+        this.carCategories = data;
+        this.sharedProduct.updateCarCategories = data;
+      });
+    }
+    if (this.sharedProduct.partCategoriesValue.length > 0) {
+      this.sharedProduct.partCategoriesObservable.subscribe((data: any) => {
+        this.partCategories = data;
+      });
+    } else {
+      this.store.getCategories().subscribe((data: any) => {
+        this.partCategories = data;
+        this.sharedProduct.updatePartCategories = data;
+      });
+    }
   }
-  if(this.sharedProduct.partCategoriesValue.length > 0){
-    this.sharedProduct.partCategoriesObservable.subscribe((data: any) => {
-      this.partCategories = data;
-    });
-  }else{
-    this.store.getCategories().subscribe((data: any) => {
-      this.partCategories = data;
-      this.sharedProduct.updatePartCategories = data;
-    });
-  }
-  }
-  addProduct(){
+  addProduct() {
     // console.log(this.newProductForm);
     // if(this.newProductForm.valid){
-      try{
-        // if(this.newProductForm.valid){
-          if(this.newProductForm.value.image){
-            let formData: any = new FormData();       
-            formData.append('file', this.fileInput.nativeElement.files[0]);
-                      
-            this.store.addImage(formData).subscribe((data: any) => {
-              console.log(data);    
-            });
-            // this.store.addImage(this.newProductForm.value.image).subscribe((data: any) => {
-            
-            // });
-          }
-          // this.store.createProduct(this.newProductForm.value as NewProductModel).subscribe((data: any) => {
-          //   if(data){
-          //     this.sharedProduct.addProduct = data;
-          //     alert("Product added successfully");
-          //     this.router.navigate(['/store']);
-          //   }else{
-          //     console.error('no data');
-          //   }
-          // });
-          // // console.log(response);
-        // }else{
-        //   throw new Error("Form is not valid");
-        // } 
-      }catch(err){
-        console.log(err);
+    try {
+      // if(this.newProductForm.valid){
+      if (this.newProductForm.value.image) {
+        let formData: any = new FormData();
+        formData.append('file', this.fileInput.nativeElement.files[0]);
+
+        this.store.addImage(formData).subscribe((data: any) => {
+          console.log(data);
+        });
+        // this.store.addImage(this.newProductForm.value.image).subscribe((data: any) => {
+
+        // });
       }
+      // this.store.createProduct(this.newProductForm.value as NewProductModel).subscribe((data: any) => {
+      //   if(data){
+      //     this.sharedProduct.addProduct = data;
+      //     alert("Product added successfully");
+      //     this.router.navigate(['/store']);
+      //   }else{
+      //     console.error('no data');
+      //   }
+      // });
+      // // console.log(response);
+      // }else{
+      //   throw new Error("Form is not valid");
+      // } 
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  reset(){
+  reset() {
     this.newProductForm.reset();
   }
 
