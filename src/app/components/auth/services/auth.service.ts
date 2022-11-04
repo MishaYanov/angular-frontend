@@ -44,9 +44,7 @@ export class AuthService {
             this.shared.updateLoginValue = true;
             this.shared.updateUserValue = userModel;
             // console.log(this.shared.userValue);
-            this.saveToken('token', data['accessToken']);
-           
-           
+            this.saveToken('token', data['accessToken']);          
             this.router.navigate(['/store']);
           }
         });

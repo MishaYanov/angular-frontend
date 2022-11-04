@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedProductService } from '../../shared/services/shared-product.service';
@@ -17,6 +17,8 @@ export class AddProductFormComponent implements OnInit {
   public partCategories: any = [];
   public selectedCar?:any;
   public selectedPart?:any;
+
+  @ViewChild("fileInput") fileInput:any;
 
   public newProductForm= new FormGroup({
     name: new FormControl('',[
@@ -79,20 +81,36 @@ export class AddProductFormComponent implements OnInit {
     // console.log(this.newProductForm);
     // if(this.newProductForm.valid){
       try{
-        const response: any = this.store.createProduct(this.newProductForm.value as NewProductModel).subscribe((data: any) => {
-          //add product to store to all the products
-          // console.log(data);
-          if(data){
-            this.sharedProduct.addProduct = data;
-          }else{
-            console.error('no data');
+        // if(this.newProductForm.valid){
+          if(this.newProductForm.value.image){
+            let formData: any = new FormData();       
+            formData.append('file', this.fileInput.nativeElement.files[0]);
+                      
+            this.store.addImage(formData).subscribe((data: any) => {
+              console.log(data);    
+            });
+            // this.store.addImage(this.newProductForm.value.image).subscribe((data: any) => {
+            
+            // });
           }
-        });
-        // console.log(response);
+          // this.store.createProduct(this.newProductForm.value as NewProductModel).subscribe((data: any) => {
+          //   if(data){
+          //     this.sharedProduct.addProduct = data;
+          //     alert("Product added successfully");
+          //     this.router.navigate(['/store']);
+          //   }else{
+          //     console.error('no data');
+          //   }
+          // });
+          // // console.log(response);
+        // }else{
+        //   throw new Error("Form is not valid");
+        // } 
       }catch(err){
         console.log(err);
       }
   }
+
   reset(){
     this.newProductForm.reset();
   }

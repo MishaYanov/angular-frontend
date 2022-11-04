@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../../cart/services/cart.service';
 import { SharedCartService } from '../../shared/services/shared-cart.service';
+import { SharedProductService } from '../../shared/services/shared-product.service';
 import { SharedUserService } from '../../shared/services/shared-user.service';
 import { ProductModel } from '../models/product.model';
 import { StoreService } from '../services/store.service';
@@ -27,8 +28,9 @@ export class ItemComponent implements OnInit {
     private shared: SharedUserService,
     private router: Router,
     private store: StoreService,
-    private cart: CartService,
-    private sharedCart: SharedCartService
+    private sharedStore: SharedProductService,
+    private sharedCart: SharedCartService,
+    private cart: CartService
   ) {}
 
   ngOnInit(): void {
@@ -47,12 +49,11 @@ export class ItemComponent implements OnInit {
   deleteHandler() {
     console.log(this.product.id);
     if (this.isAdmin && this.product.id) {
-      const response: any = this.store.deleteProduct(this.product.id);
-        if (response) {
-          alert('Product deleted successfully!');
-        } else {
-          alert('Error deleting product!');
-        }
+      this.store.deleteProduct(this.product.id).subscribe((data:any) => {
+        console.log(data);
+        //update store
+        this.sharedStore.removeProduct = data["id"];
+      });
     }
   }
   addItemTocart() {

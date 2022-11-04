@@ -89,10 +89,26 @@ export class SharedCartService {
       //this is invoked after login so it is safe to assume there is either a cart with items or an empty cart
       await this.cartService.getCart(this.shared.userValue.id!).subscribe(
         (data: any) => {
+          if(data){
           localStorage.setItem('cartToken', JSON.stringify(data));
           this.updateCart = data;
           this.updateCartItems = data.cartItems;
           this.updateDelivery = data.delivery;
+        }else{
+          console.log('no data');
+          this.cartService.createCart(this.shared.userValue.id!).subscribe(
+            (data: any) => {
+              if(data){
+              localStorage.setItem('cartToken', JSON.stringify(data));
+              this.updateCart = data;
+              this.updateCartItems = data.cartItems;
+              this.updateDelivery = data.delivery;
+            }else{
+              console.log('no data');
+            }
+            }
+          )
+        }
         },
         (err: any) => {
           console.log(err);
