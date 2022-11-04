@@ -5,8 +5,13 @@
         height: inherit;
     }
     .item-image{
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
+        .item-image img{
+            height: 150px !important;
+            width: 150px !important;
+            border-radius: 5px;
+        }
     }
     .item-name{
         font-size: 20px;

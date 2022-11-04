@@ -43,4 +43,16 @@ export class StoreService {
   // public createCarType(carType: any): any {}
 
   // public deleteCarType(id: string): any {}
+
+  public addImage(image: any): any {    
+    return this.http.post('http://localhost:3000/store/upload', image);
+  }
+
+  public updateImage(image: any, id: string): any {
+    return this.http.put(`http://localhost:3000/store/image/${id}`, image);
+  }
+
+  public deleteImage(id: string): any {
+    return this.http.delete(`http://localhost:3000/store/image/${id}`);
+  }
 }
