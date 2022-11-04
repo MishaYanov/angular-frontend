@@ -19,6 +19,7 @@ export class CartService {
   }
   
   public updateCart(id: number, cart: any): any {    
+    console.log(cart);
     return this.http.put(`http://localhost:3000/cart/${id}`, cart);
   }
 

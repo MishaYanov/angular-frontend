@@ -99,6 +99,10 @@ export class CheckoutComponent implements OnInit {
         this.sharedCart.updateCart = {
           ...this.sharedCart.cartValue, delivery: newDelivery
         }
+        console.log(this.sharedCart.deliveryValue);
+        console.log(this.sharedCart.cartValue);
+        
+        
         this.sharedCart.updateHandelr();
       }
       alert("New delivery saved!")
