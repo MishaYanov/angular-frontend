@@ -85,27 +85,23 @@ export class AddProductFormComponent implements OnInit {
       if (this.newProductForm.value.image) {
         let formData: any = new FormData();
         formData.append('file', this.fileInput.nativeElement.files[0]);
-
         this.store.addImage(formData).subscribe((data: any) => {
           console.log(data);
+          if(data["img"]){
+            this.newProductForm.value.image = data["img"];
+          }
         });
-        // this.store.addImage(this.newProductForm.value.image).subscribe((data: any) => {
-
-        // });
       }
-      // this.store.createProduct(this.newProductForm.value as NewProductModel).subscribe((data: any) => {
-      //   if(data){
-      //     this.sharedProduct.addProduct = data;
-      //     alert("Product added successfully");
-      //     this.router.navigate(['/store']);
-      //   }else{
-      //     console.error('no data');
-      //   }
-      // });
-      // // console.log(response);
-      // }else{
-      //   throw new Error("Form is not valid");
-      // } 
+      this.store.createProduct(this.newProductForm.value as NewProductModel).subscribe((data: any) => {
+        if(data){
+          this.sharedProduct.addProduct = data;
+          alert("Product added successfully");
+          this.router.navigate(['/store']);
+        }else{
+          console.error('no data');
+        }
+      });
+      // console.log(response);
     } catch (err) {
       console.log(err);
     }

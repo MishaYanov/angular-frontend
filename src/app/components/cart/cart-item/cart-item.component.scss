@@ -7,3 +7,15 @@
     border-bottom: 1px solid #ccc !important;
     height: 5rem !important;
 }
+.cart_actions{
+    height: inherit;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 0 3rem 0;
+    margin-top: 30px;
+    input{
+        width: 1rem !important;
+        height: inherit !important;
+    }
+}

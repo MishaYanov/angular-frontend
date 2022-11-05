@@ -47,18 +47,6 @@
             />
           </div>
           <div class="form--body--input">
-            <label for="image">Image</label>
-            <input
-              type="file"
-              name="image"
-              formControlName="image"
-              id="image"
-              placeholder="Product Image"
-              required
-              min="3"
-            />
-          </div>
-          <div class="form--body--input">
             <label for="partCategory">Part</label>
             <select
               name="partSelector"
@@ -104,9 +92,6 @@
         </div>
       </form>
       <div class="errors">
-        <div *ngIf="form['image']?.errors?.['invalidImageType']">
-          <p>Image type is invalid</p>
-      </div>
       <div class="" *ngIf="NewValuesForm.status">
         <p *ngIf="NewValuesForm.status === 'INVALID'">
           Please do the requried validations
@@ -117,7 +102,7 @@
     <div class="edit--oldProduct">
       <div class="edit--oldProduct--grid">
         <div class="edit--oldProduct--image">
-          <img src="https://via.placeholder.com/150" alt="" />
+          <img style="aspect-ratio: 1/1; width:150px;" src="{{product?.image}}" alt="" />
         </div>
         <div class="edit--oldProduct--info">
           <h3>Product Name: {{ product?.name }}</h3>

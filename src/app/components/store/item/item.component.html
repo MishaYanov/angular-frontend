@@ -19,7 +19,7 @@
     </td>
     <td class="item-action">
         <a class="item-add_item_to_cart"  *ngIf="!isAdmin" (click)="addItemTocart()"><mat-icon>add_shopping_cart</mat-icon></a>
-        <a class="item-add_item_to_cart"  *ngIf="!isAdmin" (click)="deleteItemFromCart()"><mat-icon>delete</mat-icon></a>
+        <a class="item-add_item_to_cart"  *ngIf="!isAdmin && ifExists" (click)="deleteItemFromCart()"><mat-icon>delete</mat-icon></a>
         <a class="item-add_item_to_cart"  *ngIf="isAdmin" (click)="deleteHandler()"><mat-icon>delete_forever</mat-icon></a>
         <a class="item-add_item_to_cart"  *ngIf="isAdmin" (click)="editHandeler()"><mat-icon>edit</mat-icon></a>
     </td>

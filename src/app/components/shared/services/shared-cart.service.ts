@@ -87,6 +87,16 @@ export class SharedCartService {
     return this.delivery$.value;
   }
 
+  checkIfItemExistsInCart(id: number): boolean {
+    let cart = this.cart$.value;
+    let item = cart.cartItems?.find((item) => item.productId === id);
+    if (item) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   updateLocalStorage() {
     localStorage.setItem('cartToken', JSON.stringify(this.cartValue));
   }
@@ -129,18 +139,14 @@ export class SharedCartService {
     }
   }
 
-  private async updateCartForUser(newCart: any) {
+  private updateCartForUser(newCart: any) {
     //remove old cart from local storage
     localStorage.removeItem('cartToken'); 
     //update cart in local storage
     localStorage.setItem('cartToken', JSON.stringify(newCart));
     this.updateCart = newCart;
-    console.log(newCart);
     this.updateCartItems = newCart.cartItems;    
     this.updateDelivery = newCart.delivery;
-    console.log(newCart.delivery);
-
-
   }
   
   async updateHandelr(){
@@ -155,7 +161,15 @@ export class SharedCartService {
     await this.cartService.updateCart(this.cartValue.id!, newCart).subscribe(
       async (data: any) => {
         if(data){
-       await this.updateCartForUser(data);
+          await this.cartService.getCart(this.shared.userValue.id!).subscribe(
+            (data: any) => {
+              if(data){
+              this.updateCartForUser(data);
+            }else{
+              console.log('no data');
+            }
+            }
+          );
       }else{
         console.log('no data');
       }
@@ -163,19 +177,27 @@ export class SharedCartService {
 
   }
 
+  resetCartForNewLogin(){
+    this.cart$.next(this._cart);
+    this.cartItems$.next([]);
+    this.delivery$.next(this._delivery);
+  }
+
+
   async resetCart(){
     let cart = this.cart$.value;
     cart.cartItems?.forEach(async (item) => {
       await this.cartService.removeItemFromCart(cart.id!, item.id!).subscribe(
-        (data: any) => {
-          if(data){
-          console.log(data);
-          this.updateCartForUser(data);
+        async (data: any) => {
+          if(!data['msg']){
+           throw new Error('error removing item from cart');
         }else{
-          console.log('no data');
+          console.log(data['msg']);
         }
         });
     });
+    this.cart$.next(this._cart);
+    this.cartItems$.next([]);
+    this.delivery$.next(this._delivery);
   }
-  
-}
+  }

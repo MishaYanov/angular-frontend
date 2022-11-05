@@ -32,6 +32,7 @@ export class AuthService {
         .post<SuccessfulAuthModel>('http://localhost:3000/auth/login', user)
         .subscribe((data: any) => {
           if (data['accessToken']) {
+            this.sharedCartService.resetCartForNewLogin();
             const user: any = jwt_decode(data.accessToken);
             const userModel: UserModel = {
               id: user['id'],
@@ -63,6 +64,7 @@ export class AuthService {
         )
         .subscribe((data: any) => {
           if (data['accessToken']) {
+            this.sharedCartService.resetCartForNewLogin();
             const user: any = jwt_decode(data.accessToken);
             console.log(user);
             this.userModel = {

@@ -3,7 +3,7 @@
 <td class="cart_item">{{cartItem.quantity}}</td>
 <td class="cart_item">{{cartItem.product?.price! * cartItem.quantity!}}</td>
 <td class="cart_actions">
-    <input type="number" class="cart_items-counter"  (change)="changeAmount($event)" min="0">
-    <button (click)="amountHandler()">change amount</button>
-    <button (click)="removeItem()">Delete Item(s)</button>
+    <input type="number" placeholder="{{cartItem.quantity}}" class="cart_items-counter"  (change)="changeAmount($event)" min="0">
+    <button class="btn main" (click)="amountHandler()">change amount</button>
+    <button class="btn grey" (click)="removeItem()">Delete Item(s)</button>
 </td>

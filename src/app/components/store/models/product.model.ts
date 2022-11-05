@@ -5,6 +5,6 @@ export class ProductModel {
   public name: string | undefined;
   public price: number | undefined;
   public description: string | undefined;
-  public carCategory: string | undefined | any;
-  public partCategory: string | undefined | any;
+  public carCategory: any;
+  public partCategory: any;
 }

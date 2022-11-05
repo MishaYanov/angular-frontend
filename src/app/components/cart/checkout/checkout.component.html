@@ -4,29 +4,27 @@
   </div>
 </div>
 <!-- Cmodal -->
-
-
 <div class="checkout-wrapper">
   <div class="checkout-cart">
+    <div class="metrics">
+      <div class="metval"><h4>Total Items: {{totalItems}}</h4></div>
+      <div class="metval"><h4>Total Price: {{totalPrice}}</h4></div>
+    </div>
     <div class="checkout-cart_items">
       <table>
         <thead>
-          <td>name</td>
-          <td>quantity</td>
-          <td>price</td>
+          <td>Name</td>
+          <td>Quantity</td>
+          <td>Price</td>
         </thead>
         <tbody>
           <tr *ngFor="let item of cart?.cartItems">
-            <td>{{item.product?.name}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.totalPrice}}</td>
+            <td>{{item?.product?.name}}</td>
+            <td>{{item?.quantity}}</td>
+            <td>{{item?.totalPrice}}</td>
           </tr>
         </tbody>
       </table>
-      <div class="metrics">
-        <div class=""><p>Total Items: {{totalItems}}</p></div>
-        <div class=""><p>Total Price: {{totalPrice}}</p></div>
-      </div>
     </div>
   </div>
   <div class="checkout-delivery">
@@ -43,11 +41,11 @@
       <div class="form--body">
       <div class="form--body--input">
         <label for="city">City</label>
-        <input type="text" name="city" id="" formControlName="city">
+        <input type="text" name="city" id="" formControlName="city" >
       </div>
       <div class="form--body--input">
-        <label for="">ddress</label>
-        <input type="text" name="" id="" formControlName="address"/>
+        <label for="">Address</label>
+        <input type="text" name="" id="" formControlName="address" />
       </div>
     </div>
     <div class="errors" *ngIf="!newDelivery.valid && (newDelivery.get('city')?.touched || newDelivery.get('addres')?.touched)">

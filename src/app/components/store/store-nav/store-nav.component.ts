@@ -59,12 +59,12 @@ export class StoreNavComponent implements OnInit, DoCheck {
       }
     );
     //get cart and update cart fileds
-    if(this.sharedCart.cartItemsValue.length === 0){
+    if(this.sharedCart?.cartItemsValue?.length === 0){
       await this.sharedCart.pullCartForUser();
     }
   }
   ngDoCheck(){
-    if(this.sharedCart.cartItemsValue.length != undefined){
+    if(this.sharedCart?.cartItemsValue?.length != undefined){
       this.cartItemsCounter = this.sharedCart.cartItemsValue.length;
     }
   }

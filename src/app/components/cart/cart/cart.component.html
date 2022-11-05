@@ -7,6 +7,14 @@
             <!-- <h2>Total: {{totalPrice | currency}}</h2> -->
         </div>
     </div>
+    <div class="cart-info">
+        <div class="cart-total__items">
+            <h3>Items: {{cartItems?.length}}</h3>
+        </div>
+        <div class="cart-total__price">
+            <h3>Total: {{totalPrice}}$</h3>
+        </div>
+    </div>
         <div class="cart-table">
                 <table>
                     <thead class="cart-head">
@@ -14,7 +22,7 @@
                         <td>Price</td>
                         <td>Quantity</td>
                         <td>Total</td>
-                        <td>actions</td>
+                        <td>Actions</td>
                     </thead>
                     <tbody >
                         <tr *ngFor="let cartItem of cartItems" app-cart-item [cartItem]="cartItem"></tr>
@@ -24,7 +32,7 @@
         </div>
         <div class="cart-controllers">
             <div class="cart-controllers__checkout">
-                <button class="btn sec" (click)="resetCart()">reset</button>
+                <button class="btn sec" (click)="resetCart()">Delete All</button>
                 <button class="btn main" (click)="InvokeCheckout()">Checkout</button>
             </div>
 </div>

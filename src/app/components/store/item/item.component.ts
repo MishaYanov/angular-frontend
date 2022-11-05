@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartItemModel } from '../../cart/models/CartItem.model';
 import { CartService } from '../../cart/services/cart.service';
 import { SharedCartService } from '../../shared/services/shared-cart.service';
 import { SharedProductService } from '../../shared/services/shared-product.service';
@@ -12,10 +13,12 @@ import { StoreService } from '../services/store.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent implements OnInit, DoCheck {
   public isAdmin: boolean = false;
+  public ifExists: boolean = false;
 
   @Input() public product: ProductModel = {
+    id: 0,
     image: 'https://via.placeholder.com/100',
     name: 'item',
     price: 0,
@@ -31,7 +34,7 @@ export class ItemComponent implements OnInit {
     private sharedStore: SharedProductService,
     private sharedCart: SharedCartService,
     private cart: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.shared.userObservable.subscribe((data) => {
@@ -40,60 +43,71 @@ export class ItemComponent implements OnInit {
       }
     });
   }
+
+  ngDoCheck() {
+    this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!);
+  }
+
   editHandeler() {
     console.log(this.product);
     if (this.isAdmin && this.product.id) {
       this.router.navigate([`/admin/edit-product/${this.product.id}`]);
     }
   }
-  deleteHandler() {
+
+  async deleteHandler() {
     console.log(this.product.id);
     if (this.isAdmin && this.product.id) {
-      this.store.deleteProduct(this.product.id).subscribe((data:any) => {
+      await this.store.deleteProduct(this.product.id).subscribe((data: any) => {
         console.log(data);
         //update store
         this.sharedStore.removeProduct = data["id"];
       });
     }
   }
+
   async addItemTocart() {
-    //check if item in cart
-    const curItemsInCart = this.sharedCart.cartItemsValue;
-    let itemInCart = false;
-    curItemsInCart.map((it) => {
-      console.log(it);
-      if (it.productId === this.product.id) {
-        it.quantity = it.quantity! + 1;
-        it.totalPrice = it.product?.price! * it.quantity!;
-        itemInCart = true;
-        // this.cart.updateCartItem(it);
+    if (!this.sharedCart.cartValue.id && !this.product) {
+      return;
+    }
+    if (this.ifExists) {
+      //add 1 to quantity
+      let curItemsInCart = this.sharedCart.cartItemsValue;
+      //try find item in cart
+      curItemsInCart.map((it) => {
+        if (it.productId === this.product.id) {
+          it.quantity!++;
+          it.totalPrice = it.quantity! * it.product?.price!;
+        }
+      });
+      this.sharedCart.updateCartItems = curItemsInCart;
+      this.sharedCart.updateCart = {
+        ...this.sharedCart.cartValue, cartItems: curItemsInCart
       }
-    });
-    //if not in cart add it
-    if (!itemInCart) {
-      const cartItem = {
+    } else {
+      //add item to cart
+      const cartItem: CartItemModel = {
         productId: this.product.id,
         quantity: 1,
         cartId: this.sharedCart.cartValue.id,
         totalPrice: this.product.price,
         product: this.product,
       };
-      this.sharedCart.updateCartItems = [...curItemsInCart, cartItem];
+      console.log(this.sharedCart.cartValue);
       this.sharedCart.updateCart = {
-        ...this.sharedCart.cartValue, cartItems: [...curItemsInCart, cartItem]
+        ...this.sharedCart.cartValue, cartItems: [...this.sharedCart?.cartItemsValue, cartItem]
       }
-      await this.sharedCart.updateHandelr();
-    }else if(itemInCart){
-      this.sharedCart.updateCartItems = curItemsInCart;
-      this.sharedCart.updateCart = {
-        ...this.sharedCart.cartValue, cartItems: curItemsInCart
-      }
-      await this.sharedCart.updateHandelr();
-      debugger
+      console.log(this.sharedCart.cartValue);
+
     }
+    console.log(this.sharedCart.cartValue);
+    debugger
+    this.sharedCart.updateHandelr();
+    console.log(this.sharedCart.cartValue);
+
   }
 
-  deleteItemFromCart() {
+  async deleteItemFromCart() {
     //check if item in cart
     let curItemsInCart = this.sharedCart.cartItemsValue;
     //try find item in cart
@@ -105,10 +119,10 @@ export class ItemComponent implements OnInit {
       this.sharedCart.updateCart = {
         ...this.sharedCart.cartValue, cartItems: curItemsInCart
       }
-      this.cart.removeItemFromCart(this.sharedCart.cartValue.id! ,itemInCart.id!).subscribe(
-        async (data:any) => {
+      await this.cart.removeItemFromCart(this.sharedCart.cartValue.id!, itemInCart.id!).subscribe(
+        async (data: any) => {
           console.log(data['msg']);
-          if(data['msg'] === 'Item deleted'){
+          if (data['msg'] === 'Item deleted') {
             await this.sharedCart.updateHandelr();
           }
         }

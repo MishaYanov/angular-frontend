@@ -60,7 +60,7 @@ export class CartItemComponent implements OnInit, DoCheck {
     if(this.curAmount == 0){
       this.removeItem();
     }else{
-      let allCartItems = this.sharedCart.cartItemsValue;
+      let allCartItems = this.sharedCart?.cartItemsValue;
     allCartItems.map((item) => {
       if (item.id === this.cartItem.id) {
         item.quantity = +this.curAmount!;

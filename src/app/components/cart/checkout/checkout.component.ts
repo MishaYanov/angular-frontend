@@ -42,13 +42,15 @@ export class CheckoutComponent implements OnInit {
     private sharedCart: SharedCartService,
     private router: Router,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     //check if cart exists? no - pull cart
     this.sharedCart.cartObservable.subscribe((data: any) => {
       this.cart = data;
       console.log(this.cart);
+      this.totalPrice = 0;
+      this.totalItems = 0;
       data.cartItems?.forEach((item: CartItemModel) => {
         this.totalItems += item.quantity!;
         this.totalPrice += item.totalPrice!;
@@ -65,14 +67,22 @@ export class CheckoutComponent implements OnInit {
   }
 
   async invokeSavedAddress() {
-    const decoded: any = await this.decodeUserToken();
-    console.log(decoded);
-    if (decoded) {
+    if (this.cart?.delivery[0] && this.cart?.delivery[0]?.city && this.cart?.delivery[0]?.address) {
       this.newDelivery.setValue({
-        city: decoded.city,
-        address: decoded.address,
+        city: this.cart?.delivery[0].city,
+        address: this.cart?.delivery[0].address,
       });
+    } else {
+      const decoded: any = await this.decodeUserToken();
+      console.log(decoded);
+      if (decoded) {
+        this.newDelivery.setValue({
+          city: decoded.city,
+          address: decoded.address,
+        });
+      }
     }
+
   }
 
   resetDelivery() {
@@ -93,28 +103,25 @@ export class CheckoutComponent implements OnInit {
         cartId: this.cart?.id,
       };
       console.log(newDelivery);
-      if(newDelivery){
+      if (newDelivery) {
         debugger
         this.sharedCart.updateDelivery = newDelivery;
         this.sharedCart.updateCart = {
           ...this.sharedCart.cartValue, delivery: newDelivery
         }
-        console.log(this.sharedCart.deliveryValue);
-        console.log(this.sharedCart.cartValue);
-        
-        
+
         this.sharedCart.updateHandelr();
       }
       alert("New delivery saved!")
     } else {
-      console.log('invalid form');
+      alert('invalid form');
     }
   }
 
   async saveAndExit() {
-    try{
+    try {
       await this.saveDelivery();
-    }catch (err) {
+    } catch (err) {
       console.error("error in delvivery update: " + err)
     }
     //navigate to store
@@ -124,18 +131,23 @@ export class CheckoutComponent implements OnInit {
   async deleteCartAndDelivery() {
     //reset fields.
     //delete cart + create new cart
-    await this.sharedCart.resetCart();
-    this.totalItems = 0;
-    this.totalPrice = 0;
-    const response = await this.cartService.removeDelivery(this.sharedUser.userValue.id!);
-    alert("CART RESETTED! you have nothing to do here please return to store")
+    if (this.cart?.cartItems?.length > 0) {
+      await this.sharedCart.resetCart();
+      this.totalItems = 0;
+      this.totalPrice = 0;
+      const response = await this.cartService.removeDelivery(this.sharedUser.userValue.id!);
+      alert("CART RESETTED! you have nothing to do here please return to store")
+    }
   }
 
   async submitInfo() {
-    if(this.newDelivery.valid){
+    if (this.newDelivery.valid && this.cart?.cartItems?.length > 0) {
+      this.saveDelivery();
       await this.sharedCart.updateHandelr();
       this.Cmodal = true;
-    }  
+    } else {
+      alert("please fill all fields and add items to cart")
+    }
   }
 
   private async decodeUserToken() {
@@ -147,7 +159,7 @@ export class CheckoutComponent implements OnInit {
       return null;
     }
   }
-  closeModalHandler(){
-    this.Cmodal =false;
+  closeModalHandler() {
+    this.Cmodal = false;
   }
 }
