@@ -49,7 +49,6 @@ export class CartComponent implements OnInit, DoCheck {
     }
   }
   InvokeCheckout(){
-    console.log('checkout');
     if(this.cartItems?.length > 0){
     this.router.navigate(['/checkout'], {relativeTo:this.route});
     } else {

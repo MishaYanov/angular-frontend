@@ -68,9 +68,7 @@ export class CartItemComponent implements OnInit {
     
     await this.sharedCart.updateHandelr();
     this.cartItem.quantity = +this.curAmount!;
-    this.cartItem.totalPrice = this.cartItem.product?.price! * this.cartItem.quantity!;
-    console.log(this.cartItem);
-    
+    this.cartItem.totalPrice = this.cartItem.product?.price! * this.cartItem.quantity!;    
     }
     
   }
@@ -84,7 +82,6 @@ export class CartItemComponent implements OnInit {
     }
     await this.cart.removeItemFromCart(this.sharedCart.cartValue.id! ,this.cartItem.id!).subscribe(
       (data:any) => {
-        console.log(data['msg']);
         if(data['msg'] === 'Item deleted'){
         this.sharedCart.updateHandelr();
         }

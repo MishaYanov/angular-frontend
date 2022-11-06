@@ -40,7 +40,6 @@ export class FinalizeSaleComponent implements OnInit, OnDestroy {
     this.btnClick.emit();
   }
   submit() {
-    console.log(this.cardMember);
     this.router.navigate(['goodbye']);
   }
 }

@@ -6,7 +6,7 @@ import { FiltersModel, ProductModel } from '../models';
 })
 export class MultipleFilterPipePipe implements PipeTransform {
   transform(products: ProductModel[], invokedFilters: FiltersModel): any {
-    //lazy filter
+    //lazy filter only if invokedFilters is not empty
     if (invokedFilters.car) {
       products = products.filter((product: ProductModel) => {
         return product.carCategory.name === invokedFilters.car;

@@ -25,7 +25,8 @@ export class ItemListComponent implements OnInit {
       this.invokedFilters = data;
     });
   }
-
+  
+  //main function to get all products
   getAllProducts(){
     const observable = this.storeService.getProducts();
     observable.subscribe((data:any) => {
@@ -39,7 +40,7 @@ export class ItemListComponent implements OnInit {
     }
     }),
     (error: ErrorHandler) => {
-      console.log(error);
+      console.error(error);
     }
   }
 

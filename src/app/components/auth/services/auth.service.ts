@@ -50,12 +50,11 @@ export class AuthService {
           }
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
   public register(newUser: RegisterModel): any {
-    console.log(newUser);
     try {
       return this.http
         .post<SuccessfulAuthModel>(
@@ -66,7 +65,6 @@ export class AuthService {
           if (data['accessToken']) {
             this.sharedCartService.resetCartForNewLogin();
             const user: any = jwt_decode(data.accessToken);
-            console.log(user);
             this.userModel = {
               id: user['id'],
               email: user['email'],
@@ -77,14 +75,13 @@ export class AuthService {
             };
             this.shared.updateLoginValue = true;
             this.shared.updateUserValue = this.userModel;
-            console.log(this.shared.userValue);
             this.saveToken('token', data['accessToken']);
             await this.sharedCartService.pullCartForUser();
             this.router.navigate(['/store']);
           }
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

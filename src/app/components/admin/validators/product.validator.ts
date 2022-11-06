@@ -6,7 +6,6 @@ export class ProductValidator{
     static imageTypeValidator(control: AbstractControl): ValidationErrors | null{
         const file = control.value;
         if(file){
-            console.log(file);
             
             if(file.match(/\.(png|bmp|jpe?g)$/i) == null){
                 alert('not image');

@@ -28,7 +28,6 @@ export class RegexValidators{
       const dateValues:any = date?.value
       if(typeof dateValues === 'string'){
         dataArr = dateValues.split("-");
-        console.log(dateValues.split("-")); 
       }
       if(!dataArr) return {"cardDateMissmatch": true};
       if((dataArr[0] - curYear > 5 || curYear - dataArr[1]  < 5)){

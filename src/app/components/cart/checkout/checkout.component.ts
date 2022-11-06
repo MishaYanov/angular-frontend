@@ -48,7 +48,6 @@ export class CheckoutComponent implements OnInit {
     //check if cart exists? no - pull cart
     this.sharedCart.cartObservable.subscribe((data: any) => {
       this.cart = data;
-      console.log(this.cart);
       this.totalPrice = 0;
       this.totalItems = 0;
       data.cartItems?.forEach((item: CartItemModel) => {
@@ -58,7 +57,6 @@ export class CheckoutComponent implements OnInit {
     });
     this.checkIfCartExists();
     this.user = this.sharedUser.userValue;
-    console.log(this.user);
   }
   private async checkIfCartExists() {
     if (this.cart?.cartItems?.length === 0) {
@@ -74,7 +72,6 @@ export class CheckoutComponent implements OnInit {
       });
     } else {
       const decoded: any = await this.decodeUserToken();
-      console.log(decoded);
       if (decoded) {
         this.newDelivery.setValue({
           city: decoded.city,
@@ -90,11 +87,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   async saveDelivery() {
-    const decoded: any = await this.decodeUserToken();
-    console.log(decoded);
     if (this.newDelivery.valid) { //validation
       const decoded: any = await this.decodeUserToken();
-      console.log(decoded);
       const newDelivery: DeliveryModel = {
         city: this.newDelivery.value.city!,
         address: this.newDelivery.value.address!,
@@ -102,7 +96,6 @@ export class CheckoutComponent implements OnInit {
         userId: decoded.id,
         cartId: this.cart?.id,
       };
-      console.log(newDelivery);
       if (newDelivery) {
         this.sharedCart.cartValue.delivery = newDelivery;
         this.sharedCart.updateCart = {
@@ -152,7 +145,6 @@ export class CheckoutComponent implements OnInit {
   private async decodeUserToken() {
     if (this.user && this.user.token) {
       const decodedToken = jwt_decode(this.user.token);
-      console.log(decodedToken);
       return decodedToken;
     } else {
       return null;

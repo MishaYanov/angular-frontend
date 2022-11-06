@@ -25,7 +25,6 @@ export class LoggedInGuard implements CanActivate {
     const token: string | null = localStorage.getItem('token');
     if (token) {
       const user: any = jwt_decode(token);
-      // console.log(user);
       if (user.exp > Date.now()) {
         return true;
       }

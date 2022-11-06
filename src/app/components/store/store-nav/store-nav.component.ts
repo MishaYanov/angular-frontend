@@ -36,13 +36,14 @@ export class StoreNavComponent implements OnInit, DoCheck {
 
 
   async ngOnInit(): Promise<void> {
+    //init car and part categories for filter
     this.store.getCategories().subscribe(
       (data: partCategories[]) => {
         this.partCategories = data;
         this.sharedProd.updatePartCategories = data;
       },
       (err: any) => {
-        console.log(err);
+        console.error(err);
       }
     );
     this.store.getCarTypes().subscribe(
@@ -51,7 +52,7 @@ export class StoreNavComponent implements OnInit, DoCheck {
         this.sharedProd.updateCarCategories = data;
       },
       (err: any) => {
-        console.log(err);
+        console.error(err);
       }
     );
     //get cart and update cart fileds
@@ -59,13 +60,13 @@ export class StoreNavComponent implements OnInit, DoCheck {
       await this.sharedCart.pullCartForUser();
     }
     this.sharedCart.cartObservable.subscribe((data: any) => {
-      console.log(data);
       this.cartItems = data.cartItems;
     });
     this.cartItemsCounter = this.cartItems?.length;
   }
   
   ngDoCheck(){
+    //update cart items counter
     if(this.cartItems?.length > 0){
       this.cartItemsCounter = this.cartItems?.length;
     }

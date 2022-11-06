@@ -11,10 +11,5 @@ export class HeroComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
-
-  }
-  sayHi() {
-    console.log('Hi');
   }
 }

@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
       this.shared.userObservable.subscribe((data) => {
         this.role = data.role;
       });
-      // console.log(this.role, this.isLoggedIn);
   }
 
   

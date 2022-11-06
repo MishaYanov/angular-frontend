@@ -25,7 +25,6 @@ const routes: Routes = [
   //closed routes
   {path: "store", component: StoreLayoutComponent, canActivate: [LoggedInGuard], children: []},
   {path: "user", component: UserPageComponent, canActivate: [LoggedInGuard], children: []},
-  
   {path: "cart", component: CartComponent, canActivate: [LoggedInGuard], children: []},
   {path: "checkout", component: CheckoutComponent, canActivate: [LoggedInGuard]},
   {path: 'goodbye', component: EndJourneyComponent, canActivate: [LoggedInGuard]},
@@ -33,6 +32,8 @@ const routes: Routes = [
   //admin routes
   {path: "admin", component: AdminPageComponent, canActivate: [AdminGuard], children: []},
   {path: "admin/edit-product/:id", component: EditProductFormComponent, canActivate: [AdminGuard], children: []},
+
+  //default route and 404
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: NotFoundPageComponent},
 

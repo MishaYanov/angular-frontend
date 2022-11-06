@@ -68,11 +68,10 @@ export class RegisterComponent implements OnInit {
           this.registerForm.value as RegisterModel
         );
         observable.subscribe((data: any) => {
-          console.log(data);
         });
       this.registerForm.reset();
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
 

@@ -51,8 +51,6 @@ export class AddProductFormComponent implements OnInit {
     return this.newProductForm.controls;
   }
 
-
-
   constructor(private store: StoreService, private router: Router, private sharedProduct: SharedProductService,) { }
 
   ngOnInit(): void {
@@ -84,14 +82,10 @@ export class AddProductFormComponent implements OnInit {
         let formData: any = new FormData();
         formData.append('file', this.fileInput.nativeElement.files[0]);
         await this.store.addImage(formData).subscribe((data: any) => {
-          console.log(data);
-          if(data["file"]){
+          if (data["file"]) {
             newImgString = 'http://localhost:3000/images/' + data["file"];
-            console.log(newImgString);
-            
-          }else{
+          } else {
             newImgString = this.newProductForm.value.image;
-            console.log(newImgString);  
           }
           let newProduct: NewProductModel = {
             name: this.newProductForm?.value?.name!,
@@ -102,25 +96,22 @@ export class AddProductFormComponent implements OnInit {
             image: newImgString,
           }
           this.store.createProduct(newProduct).subscribe((data: any) => {
-            if(data){
+            if (data) {
               this.sharedProduct.addProduct = data;
               alert("Product added successfully");
               this.router.navigate(['/store']);
-            }else{
+            } else {
               console.error('no data');
             }
           });
 
         });
       }
-      // console.log(response);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
-
   reset() {
     this.newProductForm.reset();
   }
-
 }

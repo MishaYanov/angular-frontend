@@ -61,7 +61,6 @@ export class SharedCartService {
     }
   }
 
-
   async pullCartForUser() {
     try {
       //this is invoked after login so it is safe to assume there is either a cart with items or an empty cart
@@ -70,7 +69,6 @@ export class SharedCartService {
           if (data) {
             this.updateCart = data;
           } else {
-            console.log('no data');
             this.cartService.createCart(this.shared.userValue.id!).subscribe(
               (data: any) => {
                 this.updateCart = data;
@@ -79,7 +77,7 @@ export class SharedCartService {
           }
         },
         (err: any) => {
-          console.log(err);
+          console.error(err);
         }
       );
     } catch (err) {
@@ -87,10 +85,10 @@ export class SharedCartService {
     }
   }
 
-  private updateCartForUser(newCart: any) {
-    this.updateCart = newCart;
-  }
-
+  //The most important function in the cart.
+  //It checks if the item exists in the cart and if it does it updates the quantity.
+  //If it doesn't it adds the item to the cart.
+  //also updates/addes the delivery
   async updateHandelr() {
     const newCart = {
       id: this.cartValue.id,
@@ -100,8 +98,7 @@ export class SharedCartService {
     };
     await this.cartService.updateCart(this.shared.userValue?.id!, newCart).subscribe(
       async (data: any) => {
-        if (data["msg"]) {
-          console.log(data["msg"] === 'Cart updated');
+        if (data["msg"] === 'Cart updated') {
           this.cartService.getCart(this.shared.userValue?.id!).subscribe(
             (data: any) => {
               if (data) {
@@ -109,7 +106,7 @@ export class SharedCartService {
               }
             });
         } else {
-          console.log('no data');
+          console.error('no data');
         }
       });
 
@@ -119,7 +116,7 @@ export class SharedCartService {
     this.cart$.next(this._cart);
   }
 
-
+  
   async resetCart() {
     let cart = this.cart$.value;
     cart.cartItems?.forEach(async (item) => {
@@ -128,7 +125,7 @@ export class SharedCartService {
           if (!data['msg']) {
             throw new Error('error removing item from cart');
           } else {
-            console.log(data['msg']);
+            console.error(data['msg']);
           }
         });
     });

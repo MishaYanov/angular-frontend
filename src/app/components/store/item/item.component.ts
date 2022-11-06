@@ -46,7 +46,8 @@ export class ItemComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!)
+    //check if item in cart
+    this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!);
     setTimeout(() => { this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!);
     }, 1000);
   }
@@ -58,10 +59,8 @@ export class ItemComponent implements OnInit, DoCheck {
   }
 
   async deleteHandler() {
-    console.log(this.product.id);
     if (this.isAdmin && this.product.id) {
       await this.store.deleteProduct(this.product.id).subscribe((data: any) => {
-        console.log(data);
         //update store
         this.sharedStore.removeProduct = data["id"];
       });
@@ -69,7 +68,6 @@ export class ItemComponent implements OnInit, DoCheck {
   }
 
   async addItemTocart() {
-    debugger
     if (!this.sharedCart.cartValue.id && !this.product) {
       return;
     }
@@ -107,8 +105,6 @@ export class ItemComponent implements OnInit, DoCheck {
       }
     }
     this.sharedCart.updateHandelr();
-    console.log(this.sharedCart.cartValue);
-    debugger
   }
 
   async deleteItemFromCart() {
@@ -124,7 +120,6 @@ export class ItemComponent implements OnInit, DoCheck {
       }
       await this.cart.removeItemFromCart(this.sharedCart.cartValue.id!, itemInCart.id!).subscribe(
         async (data: any) => {
-          console.log(data['msg']);
           if (data['msg'] === 'Item deleted') {
             await this.sharedCart.updateHandelr();
           }

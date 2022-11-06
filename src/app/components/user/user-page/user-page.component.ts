@@ -16,9 +16,7 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
-    const decoded = jwt_decode(token!);
-    console.log(decoded);
-    
+    const decoded = jwt_decode(token!);    
     this.user = decoded;
   }
 

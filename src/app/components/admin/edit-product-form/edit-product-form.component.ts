@@ -96,9 +96,6 @@ export class EditProductFormComponent implements OnInit {
       (partCategory: any) =>
         partCategory.name === this.product?.partCategory.name
     );
-    console.log(this.product?.carCategory, this.product?.partCategory);
-
-    console.log(carCategoryId, partCategoryId);
 
     if (this.NewValuesForm.value.id === null) {
       this.NewValuesForm.value.id = this.product?.id;
