@@ -30,7 +30,7 @@ export class AuthService {
     try {
       return this.http
         .post<SuccessfulAuthModel>('http://localhost:3000/auth/login', user)
-        .subscribe((data: any) => {
+        .subscribe(async (data: any) => {
           if (data['accessToken']) {
             this.sharedCartService.resetCartForNewLogin();
             const user: any = jwt_decode(data.accessToken);
@@ -44,8 +44,8 @@ export class AuthService {
             };
             this.shared.updateLoginValue = true;
             this.shared.updateUserValue = userModel;
-            // console.log(this.shared.userValue);
-            this.saveToken('token', data['accessToken']);          
+            this.saveToken('token', data['accessToken']);
+            await this.sharedCartService.pullCartForUser();          
             this.router.navigate(['/store']);
           }
         });
@@ -62,7 +62,7 @@ export class AuthService {
           'http://localhost:3000/auth/register',
           newUser
         )
-        .subscribe((data: any) => {
+        .subscribe(async (data: any) => {
           if (data['accessToken']) {
             this.sharedCartService.resetCartForNewLogin();
             const user: any = jwt_decode(data.accessToken);
@@ -79,6 +79,7 @@ export class AuthService {
             this.shared.updateUserValue = this.userModel;
             console.log(this.shared.userValue);
             this.saveToken('token', data['accessToken']);
+            await this.sharedCartService.pullCartForUser();
             this.router.navigate(['/store']);
           }
         });

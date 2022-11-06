@@ -1,1 +1,17 @@
-<p>user-page works!</p>
+<div class="user-wrapper">
+  <div class="user-header">
+    <div class="user-info">
+      <div class="user-info--image">
+        <img src="https://i.imgur.com/0X2qQ2y.jpg" alt="user image" />
+      </div>
+      <div class="user-info--text">
+        <h2 class="user-info--text">Hello: {{ user?.name }}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus voluptas laboriosam saepe a, eum vero nemo tempora quo beatae reiciendis amet magnam corporis nesciunt magni pariatur ratione ducimus incidunt voluptatem.</p>
+        <p class="user-info--text">id:{{ user?.idNumber }}</p>
+        <p class="user-info--text">email: {{ user?.email }}</p>
+        <p class="user-info--text">city: {{ user?.city }}</p>
+        <p class="user-info--text">address: {{ user?.address }}</p>
+      </div>
+    </div>
+  </div>
+</div>

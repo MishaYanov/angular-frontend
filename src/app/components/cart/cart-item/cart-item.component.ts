@@ -1,5 +1,4 @@
-import { Component, DoCheck, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { Component, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
 import { SharedCartService } from '../../shared/services/shared-cart.service';
 import { CartItemModel } from '../models/CartItem.model';
 import { CartService } from '../services/cart.service';
@@ -9,7 +8,7 @@ import { CartService } from '../services/cart.service';
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss']
 })
-export class CartItemComponent implements OnInit, DoCheck {
+export class CartItemComponent implements OnInit {
 
   private itemDiff?: KeyValueDiffer<string, any>;
 
@@ -40,12 +39,6 @@ export class CartItemComponent implements OnInit, DoCheck {
     this.itemDiff = this.Idiff.find(this.cartItem).create();
   }
 
-  ngDoCheck(): void {
-    const changes = this.itemDiff?.diff(this.cartItem);
-    if (changes) {
-      console.log(changes);
-    }
-  }
   async changeAmount(event:any){
     if(event.target.value < 0){
       event.target.value = 0;
@@ -60,7 +53,7 @@ export class CartItemComponent implements OnInit, DoCheck {
     if(this.curAmount == 0){
       this.removeItem();
     }else{
-      let allCartItems = this.sharedCart?.cartItemsValue;
+      let allCartItems = this.sharedCart?.cartValue?.cartItems!;
     allCartItems.map((item) => {
       if (item.id === this.cartItem.id) {
         item.quantity = +this.curAmount!;
@@ -69,7 +62,6 @@ export class CartItemComponent implements OnInit, DoCheck {
     });    
 
     //update cart in db
-    this.sharedCart.updateCartItems = allCartItems;
     this.sharedCart.updateCart = {
       ...this.sharedCart.cartValue, cartItems: allCartItems
     }
@@ -85,9 +77,8 @@ export class CartItemComponent implements OnInit, DoCheck {
 
   async removeItem() {
     //remove item from cart
-    const allCartItems = this.sharedCart.cartItemsValue;
+    const allCartItems = this.sharedCart.cartValue?.cartItems!;
     const newCart = allCartItems.filter((item) => item.id !== this.cartItem.id);
-    this.sharedCart.updateCartItems = newCart;
     this.sharedCart.updateCart = {
       ...this.sharedCart.cartValue, cartItems: newCart
     }

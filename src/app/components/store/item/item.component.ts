@@ -42,14 +42,16 @@ export class ItemComponent implements OnInit, DoCheck {
         this.isAdmin = true;
       }
     });
+    
   }
 
   ngDoCheck() {
-    this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!);
+    this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!)
+    setTimeout(() => { this.ifExists = this.sharedCart.checkIfItemExistsInCart(this.product.id!);
+    }, 1000);
   }
 
   editHandeler() {
-    console.log(this.product);
     if (this.isAdmin && this.product.id) {
       this.router.navigate([`/admin/edit-product/${this.product.id}`]);
     }
@@ -67,12 +69,13 @@ export class ItemComponent implements OnInit, DoCheck {
   }
 
   async addItemTocart() {
+    debugger
     if (!this.sharedCart.cartValue.id && !this.product) {
       return;
     }
     if (this.ifExists) {
       //add 1 to quantity
-      let curItemsInCart = this.sharedCart.cartItemsValue;
+      let curItemsInCart = this.sharedCart.cartValue?.cartItems!;
       //try find item in cart
       curItemsInCart.map((it) => {
         if (it.productId === this.product.id) {
@@ -80,7 +83,6 @@ export class ItemComponent implements OnInit, DoCheck {
           it.totalPrice = it.quantity! * it.product?.price!;
         }
       });
-      this.sharedCart.updateCartItems = curItemsInCart;
       this.sharedCart.updateCart = {
         ...this.sharedCart.cartValue, cartItems: curItemsInCart
       }
@@ -93,29 +95,30 @@ export class ItemComponent implements OnInit, DoCheck {
         totalPrice: this.product.price,
         product: this.product,
       };
-      console.log(this.sharedCart.cartValue);
-      this.sharedCart.updateCart = {
-        ...this.sharedCart.cartValue, cartItems: [...this.sharedCart?.cartItemsValue, cartItem]
+      let curItemsInCart = this.sharedCart.cartValue?.cartItems!;
+      if(curItemsInCart && curItemsInCart.length > 0){
+        curItemsInCart.push(cartItem);
       }
-      console.log(this.sharedCart.cartValue);
-
+      else{
+        curItemsInCart = [cartItem];
+      }
+      this.sharedCart.updateCart = {
+        ...this.sharedCart.cartValue, cartItems: curItemsInCart
+      }
     }
-    console.log(this.sharedCart.cartValue);
-    debugger
     this.sharedCart.updateHandelr();
     console.log(this.sharedCart.cartValue);
-
+    debugger
   }
 
   async deleteItemFromCart() {
     //check if item in cart
-    let curItemsInCart = this.sharedCart.cartItemsValue;
+    let curItemsInCart = this.sharedCart.cartValue?.cartItems!;
     //try find item in cart
     let itemInCart = curItemsInCart.find((it) => it.productId === this.product.id);
     //if in cart remove it    
     if (itemInCart) {
       curItemsInCart = curItemsInCart.filter((it) => it.productId !== this.product.id);
-      this.sharedCart.updateCartItems = curItemsInCart;
       this.sharedCart.updateCart = {
         ...this.sharedCart.cartValue, cartItems: curItemsInCart
       }

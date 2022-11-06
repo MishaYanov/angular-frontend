@@ -104,8 +104,7 @@ export class CheckoutComponent implements OnInit {
       };
       console.log(newDelivery);
       if (newDelivery) {
-        debugger
-        this.sharedCart.updateDelivery = newDelivery;
+        this.sharedCart.cartValue.delivery = newDelivery;
         this.sharedCart.updateCart = {
           ...this.sharedCart.cartValue, delivery: newDelivery
         }

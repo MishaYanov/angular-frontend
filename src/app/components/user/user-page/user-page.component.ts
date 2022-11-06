@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-user-page',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPageComponent implements OnInit {
 
-  constructor() { }
+  public user:any;
+
+  constructor() {
+    
+  }
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    const decoded = jwt_decode(token!);
+    console.log(decoded);
+    
+    this.user = decoded;
   }
 
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
+import { SharedCartService } from '../../shared/services/shared-cart.service';
+import { CartService } from '../services/cart.service';
+
 
 
 @Component({
@@ -17,9 +20,11 @@ export class EndJourneyComponent implements OnInit {
     userId: new FormControl(''), //custom validator
   })
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sharedCart: SharedCartService, ) { }
+
 
   ngOnInit(): void {
+    this.sharedCart.resetCart();
   }
   navigateToStore(){
     this.router.navigate(['store'])

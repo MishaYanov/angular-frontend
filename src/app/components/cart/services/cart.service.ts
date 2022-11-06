@@ -18,9 +18,9 @@ export class CartService {
     return this.http.post(`http://localhost:3000/cart/${userId}`, {});
   }
   
-  public updateCart(id: number, cart: any): any {    
+  public updateCart(userId: number, cart: any): any {    
     console.log(cart);
-    return this.http.put(`http://localhost:3000/cart/${id}`, cart);
+    return this.http.put(`http://localhost:3000/cart/${userId}`, cart);
   }
 
   public addItemToCart(cartId: number, cartItem: CartItemModel): any {

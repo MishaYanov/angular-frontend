@@ -73,21 +73,9 @@
             </select>
           </div>
           <div class="form--footer">
-            <app-button
-              customClass="primary"
-              text="Submit Edit"
-              (click)="editProduct()"
-            ></app-button>
-            <app-button
-              customClass="primary"
-              text="reset"
-              (click)="resetValues()"
-            ></app-button>
-            <app-button
-              customClass="primary"
-              text="cancel"
-              (click)="cancel()"
-            ></app-button>
+            <button class="btn main" (click)="editProduct()">Submit Edit</button>
+            <button class="btn sec" (click)="resetValues()">Reset</button>
+            <button class="btn sec" (click)="cancel()">cancel</button>
           </div>
         </div>
       </form>

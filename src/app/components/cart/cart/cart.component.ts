@@ -36,7 +36,6 @@ export class CartComponent implements OnInit, DoCheck {
   }
   ngDoCheck() {
     const changes = this.cartDiffrenceDetector?.diff(this.cartItems);
-    // debugger
     if(this.cartItems && this.cartItems?.length > 0){
       this.totalPrice =0;
       this.totalItems = 0;

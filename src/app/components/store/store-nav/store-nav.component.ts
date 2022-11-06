@@ -1,5 +1,6 @@
 import { Component, DoCheck, IterableDiffers, KeyValueDiffer, OnInit, Output } from '@angular/core';
 import { defaultRippleAnimationConfig } from '@angular/material/core';
+import { CartItemComponent } from '../../cart/cart-item/cart-item.component';
 import { CartService } from '../../cart/services/cart.service';
 import { SharedCartService } from '../../shared/services/shared-cart.service';
 import { SharedProductService } from '../../shared/services/shared-product.service';
@@ -15,7 +16,7 @@ import { StoreService } from '../services/store.service';
 export class StoreNavComponent implements OnInit, DoCheck {
   public carCategories: carCategories[] = [];
   public partCategories: partCategories[] = [];
-
+  public cartItems: CartItemComponent[] = [];
 
   public selectedCar?: any;
   public selectedPart?: any;
@@ -23,18 +24,13 @@ export class StoreNavComponent implements OnInit, DoCheck {
 
   public userName = this.shared.userValue.name;
   public cartItemsCounter?:any = 0;
-  private ldiff:any;
 
   constructor(
     private shared: SharedUserService,
     private store: StoreService,
     private sharedProd: SharedProductService,
     private sharedCart: SharedCartService,
-    differs: IterableDiffers
-  ) {
-    this.ldiff = differs.find([]).create();
-
-  }
+  ) {}
 
 
 
@@ -59,13 +55,19 @@ export class StoreNavComponent implements OnInit, DoCheck {
       }
     );
     //get cart and update cart fileds
-    if(this.sharedCart?.cartItemsValue?.length === 0){
+    if(!this.sharedCart?.cartValue?.cartItems || this.sharedCart?.cartValue?.cartItems?.length === 0){
       await this.sharedCart.pullCartForUser();
     }
+    this.sharedCart.cartObservable.subscribe((data: any) => {
+      console.log(data);
+      this.cartItems = data.cartItems;
+    });
+    this.cartItemsCounter = this.cartItems?.length;
   }
+  
   ngDoCheck(){
-    if(this.sharedCart?.cartItemsValue?.length != undefined){
-      this.cartItemsCounter = this.sharedCart.cartItemsValue.length;
+    if(this.cartItems?.length > 0){
+      this.cartItemsCounter = this.cartItems?.length;
     }
   }
   

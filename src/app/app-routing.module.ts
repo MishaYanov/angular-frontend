@@ -13,6 +13,7 @@ import { ContactMeComponent } from './components/layout/contact-me/contact-me.co
 import { HeroComponent } from './components/layout/hero/hero.component';
 import { NotFoundPageComponent } from './components/layout/not-found-page/not-found-page.component';
 import { StoreLayoutComponent } from './components/layout/store-layout/store-layout.component';
+import { UserPageComponent } from './components/user/user-page/user-page.component';
 
 const routes: Routes = [
   //open routes
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: "contact", component: ContactMeComponent},
   //closed routes
   {path: "store", component: StoreLayoutComponent, canActivate: [LoggedInGuard], children: []},
+  {path: "user", component: UserPageComponent, canActivate: [LoggedInGuard], children: []},
   
   {path: "cart", component: CartComponent, canActivate: [LoggedInGuard], children: []},
   {path: "checkout", component: CheckoutComponent, canActivate: [LoggedInGuard]},
